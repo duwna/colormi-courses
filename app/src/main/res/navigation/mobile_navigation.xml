@@ -42,7 +42,7 @@
             app:destination="@id/navigation_registration" />
         <action
             android:id="@+id/action_navigation_auth_to_navigation_enter"
-            app:destination="@id/navigation_enter" />
+            app:destination="@+id/navigation_enter" />
     </fragment>
 
     <fragment
