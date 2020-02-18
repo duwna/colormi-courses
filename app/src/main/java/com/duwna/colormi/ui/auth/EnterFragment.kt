@@ -29,6 +29,7 @@ class EnterFragment : Fragment() {
     }
 
     private fun onEnterClick() {
+        if (!isInputValid()) return
         AuthRepository.authUser(
             et_email.text.toString(),
             et_password.text.toString(),
@@ -54,4 +55,19 @@ class EnterFragment : Fragment() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    private fun isInputValid(): Boolean {
+        var message: String? = null
+        when {
+            et_email.text.isBlank() -> message = "Email не должен быть пустым."
+            et_password.text.isBlank() -> message = "Пароль не должен быть пустым."
+        }
+        return if (message != null) {
+            Snackbar.make(container, message, Snackbar.LENGTH_LONG).show()
+            false
+        } else {
+            true
+        }
+    }
+
 }

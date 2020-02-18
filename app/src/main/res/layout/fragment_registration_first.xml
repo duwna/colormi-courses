@@ -25,7 +25,7 @@
 
             <TextView
                 style="@style/text_view_auth"
-                android:text="E-mail:" />
+                android:text="Имя:" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -34,16 +34,17 @@
                 android:background="@drawable/edit_text_round_corners">
 
                 <EditText
-                    android:inputType="textEmailAddress"
-                    android:imeOptions="actionNext"
-                    android:id="@+id/et_email"
+                    android:id="@+id/et_first_name"
                     style="@style/edit_text_round"
-                    android:hint="Введите E-mail..." />
+                    android:hint="Введите ваше имя..."
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName" />
+
             </FrameLayout>
 
             <TextView
                 style="@style/text_view_auth"
-                android:text="Пароль:" />
+                android:text="Фамилия:" />
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -52,18 +53,37 @@
                 android:background="@drawable/edit_text_round_corners">
 
                 <EditText
-                    android:inputType="textPassword"
-                    android:imeOptions="actionDone"
-                    android:id="@+id/et_password"
+                    android:id="@+id/et_last_name"
                     style="@style/edit_text_round"
-                    android:hint="Введите пароль..." />
+                    android:hint="Введите вашу фамилию..."
+                    android:imeOptions="actionNext"
+                    android:inputType="textPersonName" />
+
+            </FrameLayout>
+
+            <TextView
+                style="@style/text_view_auth"
+                android:text="Телефон:" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/edit_text_round_corners">
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    style="@style/edit_text_round"
+                    android:hint="Введите номер телефона..."
+                    android:imeOptions="actionDone"
+                    android:inputType="phone" />
 
             </FrameLayout>
 
             <Button
-                android:id="@+id/btn_enter"
+                android:id="@+id/btn_next"
                 style="@style/button_round"
-                android:text="Войти" />
+                android:text="Далее" />
 
         </LinearLayout>
 

@@ -26,7 +26,7 @@ class AuthFragment : Fragment() {
             findNavController().navigate(R.id.navigation_enter)
         }
         btn_registration.setOnClickListener {
-            findNavController().navigate(R.id.navigation_registration)
+            findNavController().navigate(R.id.navigation_registration_first)
         }
 
         super.onViewCreated(view, savedInstanceState)

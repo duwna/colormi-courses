@@ -37,18 +37,38 @@
         android:id="@+id/navigation_auth"
         android:name="com.duwna.colormi.ui.auth.AuthFragment"
         tools:layout="@layout/fragment_authentication" >
+
         <action
-            android:id="@+id/action_navigation_auth_to_navigation_registration"
-            app:destination="@id/navigation_registration" />
+            android:id="@+id/action_navigation_auth_to_navigation_registration_first"
+            app:destination="@id/navigation_registration_first" />
         <action
             android:id="@+id/action_navigation_auth_to_navigation_enter"
-            app:destination="@+id/navigation_enter" />
+            app:destination="@id/navigation_enter" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_registration"
-        android:name="com.duwna.colormi.ui.auth.RegistrationFragment"
-        tools:layout="@layout/fragment_registration" />
+        android:id="@+id/navigation_registration_second"
+        android:name="com.duwna.colormi.ui.auth.RegistrationFragmentSecond"
+        tools:layout="@layout/fragment_registration_second" >
+        <argument
+            android:name="firstName"
+            app:argType="string" />
+        <argument
+            android:name="lastName"
+            app:argType="string" />
+        <argument
+            android:name="phone"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_registration_first"
+        android:name="com.duwna.colormi.ui.auth.RegistrationFragmentFirst"
+        tools:layout="@layout/fragment_registration_first" >
+        <action
+            android:id="@+id/action_navigation_registration_first_to_navigation_registration_second"
+            app:destination="@id/navigation_registration_second" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_enter"
