@@ -36,14 +36,12 @@ object AuthRepository {
                     onComplete?.invoke()
                     user.id = this.user?.uid
                     writeNewUserToDB(user)
-                }
-                else onError?.invoke(task.exception)
+                } else onError?.invoke(task.exception)
             }
     }
 
-    fun signOut() {
-        auth.signOut()
-    }
+    fun signOut() = auth.signOut()
+
 
     private fun writeNewUserToDB(user: User) {
         database.child("User").push().setValue(user)

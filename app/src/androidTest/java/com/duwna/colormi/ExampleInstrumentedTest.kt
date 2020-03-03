@@ -1,12 +1,13 @@
 package com.duwna.colormi
 
-import androidx.test.platform.app.InstrumentationRegistry
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.ext.junit.runners.AndroidJUnit4
-
+import androidx.test.rule.ActivityTestRule
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-
-import org.junit.Assert.*
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -15,10 +16,13 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+    @get:Rule
+    val activityTestRule = ActivityTestRule(MainActivity::class.java, true, true)
+
     @Test
-    fun useAppContext() {
-        // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.duwna.colormi", appContext.packageName)
+    fun testValidation() {
+        onView(withId(R.id.navigation_profile)).perform(click())
+        onView(withId(R.id.btn_registration)).perform(click())
+        onView(withId(R.id.et_first_name)).perform(click())
     }
 }

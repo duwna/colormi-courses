@@ -17,75 +17,80 @@
         app:cardElevation="2dp"
         app:cardUseCompatPadding="true">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                style="@style/text_view_auth"
-                android:text="Имя:" />
-
-            <FrameLayout
+            android:layout_height="match_parent">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/edit_text_round_corners">
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <EditText
-                    android:id="@+id/et_first_name"
-                    style="@style/edit_text_round"
-                    android:hint="Введите ваше имя..."
-                    android:imeOptions="actionNext"
-                    android:inputType="textPersonName" />
+                <TextView
+                    style="@style/text_view_auth"
+                    android:text="Имя:" />
 
-            </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/edit_text_round_corners">
 
-            <TextView
-                style="@style/text_view_auth"
-                android:text="Фамилия:" />
+                    <EditText
+                        android:id="@+id/et_first_name"
+                        style="@style/edit_text_round"
+                        android:hint="Введите ваше имя..."
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/edit_text_round_corners">
+                </FrameLayout>
 
-                <EditText
-                    android:id="@+id/et_last_name"
-                    style="@style/edit_text_round"
-                    android:hint="Введите вашу фамилию..."
-                    android:imeOptions="actionNext"
-                    android:inputType="textPersonName" />
+                <TextView
+                    style="@style/text_view_auth"
+                    android:text="Фамилия:" />
 
-            </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/edit_text_round_corners">
 
-            <TextView
-                style="@style/text_view_auth"
-                android:text="Телефон:" />
+                    <EditText
+                        android:id="@+id/et_last_name"
+                        style="@style/edit_text_round"
+                        android:hint="Введите вашу фамилию..."
+                        android:imeOptions="actionNext"
+                        android:inputType="textPersonName" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/edit_text_round_corners">
+                </FrameLayout>
 
-                <EditText
-                    android:id="@+id/et_phone"
-                    style="@style/edit_text_round"
-                    android:hint="Введите номер телефона..."
-                    android:imeOptions="actionDone"
-                    android:inputType="phone" />
+                <TextView
+                    style="@style/text_view_auth"
+                    android:text="Телефон:" />
 
-            </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@drawable/edit_text_round_corners">
 
-            <Button
-                android:id="@+id/btn_next"
-                style="@style/button_round"
-                android:text="Далее" />
+                    <EditText
+                        android:id="@+id/et_phone"
+                        style="@style/edit_text_round"
+                        android:hint="Введите номер телефона..."
+                        android:imeOptions="actionDone"
+                        android:inputType="phone" />
 
-        </LinearLayout>
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/btn_next"
+                    style="@style/button_round"
+                    android:text="Далее" />
+
+            </LinearLayout>
+        </ScrollView>
+
 
     </androidx.cardview.widget.CardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
