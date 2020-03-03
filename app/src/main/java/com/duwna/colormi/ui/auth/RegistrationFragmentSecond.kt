@@ -26,7 +26,7 @@ class RegistrationFragmentSecond : Fragment() {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        btn_registration.setOnClickListener { onRegisterClick() }
+        btn_register.setOnClickListener { onRegisterClick() }
         super.onActivityCreated(savedInstanceState)
     }
 
@@ -69,8 +69,12 @@ class RegistrationFragmentSecond : Fragment() {
     private fun isInputValid(): Boolean {
         var message: String? = null
         when {
-            et_email.text.isBlank() -> message = "Email не должен быть пустым."
-            et_password.text.length < 6 -> message = "Пароль должен содержать минимум 6 символов."
+            et_email.text.isBlank() ->
+                message = "Email не должен быть пустым."
+            !et_email.text.matches("[^@]+@[^.]+\\..+".toRegex()) ->
+                message = "Email не является валидным."
+            et_password.text.length < 6 ->
+                message = "Пароль должен содержать минимум 6 символов."
             et_password.text.toString() != et_re_password.text.toString() ->
                 message = "Пароли не совпадают."
         }

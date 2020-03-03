@@ -92,7 +92,7 @@
                 </FrameLayout>
 
                 <Button
-                    android:id="@+id/btn_registration"
+                    android:id="@+id/btn_register"
                     style="@style/button_round"
                     android:text="Зарегистрироваться" />
 
