@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:19.2.0'
     implementation 'com.google.firebase:firebase-database:19.2.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
+    implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
     testImplementation 'junit:junit:4.12'
 

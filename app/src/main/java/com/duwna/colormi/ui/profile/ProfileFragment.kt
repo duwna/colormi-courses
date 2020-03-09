@@ -26,13 +26,12 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        AuthRepository.user ?: findNavController().navigate(R.id.navigation_auth)
+       // AuthRepository.user ?: findNavController().navigate(R.id.navigation_auth)
 
         btn_sign_out.setOnClickListener {
             AuthRepository.signOut()
             findNavController().navigate(R.id.navigation_auth)
         }
 
-        tv_email.text = AuthRepository.user?.email
     }
 }
