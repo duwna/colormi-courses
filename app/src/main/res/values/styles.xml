@@ -15,7 +15,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:background">@drawable/button_round_corners</item>
         <item name="fontFamily">casual"</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="edit_text_round">
