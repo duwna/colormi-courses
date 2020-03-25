@@ -23,10 +23,10 @@ class AuthFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn_enter.setOnClickListener {
-            findNavController().navigate(R.id.navigation_enter)
+            findNavController().navigate(R.id.action_auth_to_enter)
         }
         btn_registration.setOnClickListener {
-            findNavController().navigate(R.id.navigation_registration)
+            findNavController().navigate(R.id.action_auth_to_registration)
         }
 
         super.onViewCreated(view, savedInstanceState)

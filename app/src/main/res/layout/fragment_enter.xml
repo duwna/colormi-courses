@@ -7,65 +7,82 @@
     android:background="@color/colorGrayLight"
     android:orientation="vertical">
 
-
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:cardUseCompatPadding="true">
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                style="@style/text_view_auth"
-                android:text="E-mail:" />
-
-            <FrameLayout
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="16dp"
-                android:background="@drawable/edit_text_round_corners">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardUseCompatPadding="true">
 
-                <EditText
-                    android:inputType="textEmailAddress"
-                    android:imeOptions="actionNext"
-                    android:id="@+id/et_email"
-                    style="@style/edit_text_round"
-                    android:hint="Введите E-mail..." />
-            </FrameLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-            <TextView
-                style="@style/text_view_auth"
-                android:text="Пароль:" />
+                    <TextView
+                        style="@style/text_view_auth"
+                        android:text="E-mail:" />
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:background="@drawable/edit_text_round_corners">
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/edit_text_round_corners">
 
-                <EditText
-                    android:inputType="textPassword"
-                    android:imeOptions="actionDone"
-                    android:id="@+id/et_password"
-                    style="@style/edit_text_round"
-                    android:hint="Введите пароль..." />
+                        <EditText
+                            android:id="@+id/et_email"
+                            style="@style/edit_text_round"
+                            android:hint="Введите E-mail..."
+                            android:imeOptions="actionNext"
+                            android:inputType="textEmailAddress" />
+                    </FrameLayout>
 
-            </FrameLayout>
+                    <TextView
+                        style="@style/text_view_auth"
+                        android:text="Пароль:" />
 
-            <Button
-                android:id="@+id/btn_enter"
-                style="@style/button_round"
-                android:text="Войти" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:background="@drawable/edit_text_round_corners">
 
-        </LinearLayout>
+                        <EditText
+                            android:id="@+id/et_password"
+                            style="@style/edit_text_round"
+                            android:hint="Введите пароль..."
+                            android:imeOptions="actionDone"
+                            android:inputType="textPassword" />
 
-    </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+
+                    <Button
+                        android:id="@+id/btn_enter"
+                        style="@style/button_round"
+                        android:text="Войти" />
+
+                    <ProgressBar
+                        android:id="@+id/progress_circular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:indeterminateTint="@android:color/black"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </FrameLayout>
+
+
+    </ScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

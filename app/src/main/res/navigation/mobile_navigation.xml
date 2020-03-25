@@ -29,7 +29,7 @@
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" >
         <action
-            android:id="@+id/action_navigation_profile_to_navigation_auth"
+            android:id="@+id/action_profile_to_auth"
             app:destination="@id/navigation_auth" />
     </fragment>
 
@@ -39,11 +39,19 @@
         tools:layout="@layout/fragment_authentication" >
 
         <action
-            android:id="@+id/action_navigation_auth_to_navigation_registration"
-            app:destination="@id/navigation_registration" />
+            android:id="@+id/action_auth_to_registration"
+            app:destination="@id/navigation_registration"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right"  />
         <action
-            android:id="@+id/action_navigation_auth_to_navigation_enter"
-            app:destination="@id/navigation_enter" />
+            android:id="@+id/action_auth_to_enter"
+            app:destination="@id/navigation_enter"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right" />
     </fragment>
 
     <fragment
