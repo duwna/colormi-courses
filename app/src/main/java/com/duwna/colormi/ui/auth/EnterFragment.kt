@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
@@ -30,21 +31,30 @@ class EnterFragment : Fragment() {
 
     private fun onEnterClick() {
         if (!isInputValid()) return
+        setLoadingState(true)
         AuthRepository.authUser(
             et_email.text.toString(),
             et_password.text.toString(),
-            { findNavController().navigate(R.id.navigation_profile) },
+            { onSuccess() },
             { exception -> onError(exception) }
         )
     }
 
-    private fun onError(exception: Exception?) {
+    private fun onSuccess() {
+        setLoadingState(false)
+        findNavController().navigate(R.id.navigation_profile)
+    }
+
+    private fun onError(exception: Exception?) = try {
         Snackbar.make(
             container,
             exception?.localizedMessage as CharSequence,
             Snackbar.LENGTH_LONG
         ).show()
+        setLoadingState(false)
+    } catch (e: Exception) {
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -60,14 +70,19 @@ class EnterFragment : Fragment() {
         var message: String? = null
         when {
             et_email.text.isBlank() -> message = "Email не должен быть пустым."
+            !et_email.text.matches("[^@]+@[^.]+\\..+".toRegex()) ->
+                message = "Email не является валидным."
             et_password.text.isBlank() -> message = "Пароль не должен быть пустым."
         }
-        return if (message != null) {
-            Snackbar.make(container, message, Snackbar.LENGTH_LONG).show()
+        return message?.let {
+            Snackbar.make(container, it, Snackbar.LENGTH_LONG).show()
             false
-        } else {
-            true
-        }
+        } ?: true
+    }
+
+    private fun setLoadingState(isLoading: Boolean) {
+        btn_enter.isVisible = !isLoading
+        progress_circular.isVisible = isLoading
     }
 
 }
