@@ -28,6 +28,13 @@ class RegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         btn_register.setOnClickListener { onRegisterClick() }
         super.onViewCreated(view, savedInstanceState)
+
+        et_first_name.setText("first name")
+        et_last_name.setText("last name")
+        et_phone.setText("+71111111111")
+        et_email.setText("email@mail.ru")
+        et_password.setText("password")
+        et_re_password.setText("password")
     }
 
     private fun onRegisterClick() {

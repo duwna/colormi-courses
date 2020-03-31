@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     tools:context=".ui.profile.ProfileFragment"
     android:background="@color/colorGrayLight">
 
@@ -54,8 +55,7 @@
                         app:layout_constraintBottom_toTopOf="@+id/tv_email"
                         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_chainStyle="packed"
-                        android:text="Оливия Хедлен" />
+                        app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
                         android:id="@+id/tv_email"
@@ -65,8 +65,7 @@
                         android:textColor="@android:color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_name"
-                        android:text="sample@mail.ru" />
+                        app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
