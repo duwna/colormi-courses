@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
 import com.duwna.colormi.models.User
+import com.duwna.colormi.models.fullName
+import com.duwna.colormi.models.initials
 import com.duwna.colormi.repositories.AuthRepository
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
-
-    private val viewModel: ProfileViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,18 +27,13 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        iv_avatar.isAvatarMode = false
+
         AuthRepository.firebaseUser ?: findNavController().navigate(R.id.navigation_auth)
 
         AuthRepository.getUserInfo(
             onComplete = { user -> bindUserData(user) },
-            onError = {
-                Snackbar.make(
-                    container,
-                    "Не удалось загрузить данные пользователя",
-                    Snackbar.LENGTH_LONG
-                ).show()
-                it?.printStackTrace()
-            }
+            onError = { exception -> onError(exception) }
         )
 
         btn_sign_out.setOnClickListener {
@@ -49,7 +44,21 @@ class ProfileFragment : Fragment() {
     }
 
     private fun bindUserData(user: User?) {
-        tv_name.text = user?.firstName
-        tv_email.text = user?.email
+        if (user != null) {
+            tv_fullName.text = user.fullName
+            tv_email.text = user.email
+            iv_avatar.setInitials(user.initials)
+        } else {
+            onError(null)
+        }
+    }
+
+    private fun onError(exception: Exception?) {
+        Snackbar.make(
+            container,
+            "Не удалось загрузить данные пользователя",
+            Snackbar.LENGTH_LONG
+        ).show()
+        exception?.printStackTrace()
     }
 }

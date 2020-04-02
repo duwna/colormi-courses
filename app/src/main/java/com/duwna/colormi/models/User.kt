@@ -8,3 +8,9 @@ data class User(
     val lastName: String = "",
     val avatarUrl: String = ""
 )
+
+val User.fullName: String
+    get() = "$firstName $lastName"
+
+val User.initials: String
+    get() = "${firstName[0]}${lastName[0]}"

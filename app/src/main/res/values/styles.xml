@@ -13,7 +13,7 @@
         <item name="android:layout_margin">16dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/button_round_corners</item>
+        <item name="android:background">@drawable/button_round_corners_black</item>
         <item name="fontFamily">casual"</item>
         <item name="android:textSize">22sp</item>
     </style>
