@@ -46,25 +46,29 @@
                         tools:src="@tools:sample/avatars" />
 
                     <TextView
+                        tools:text="@tools:sample/full_names"
                         android:id="@+id/tv_fullName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:textColor="@android:color/black"
                         android:textSize="20sp"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toTopOf="@+id/tv_email"
                         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_chainStyle="packed" />
 
                     <TextView
+                        tools:text="email@example.com"
                         android:id="@+id/tv_email"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:textColor="@android:color/black"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/iv_avatar"
                         app:layout_constraintTop_toBottomOf="@+id/tv_fullName" />
 
@@ -114,6 +118,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/btn_edit_profile"
                         android:padding="16dp"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"

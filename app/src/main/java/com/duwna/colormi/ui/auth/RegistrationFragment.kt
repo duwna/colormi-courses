@@ -29,8 +29,8 @@ class RegistrationFragment : Fragment() {
         btn_register.setOnClickListener { onRegisterClick() }
         super.onViewCreated(view, savedInstanceState)
 
-        et_first_name.setText("first name")
-        et_last_name.setText("last name")
+        et_first_name.setText("Firstname")
+        et_last_name.setText("Lastname")
         et_phone.setText("+71111111111")
         et_email.setText("email@mail.ru")
         et_password.setText("password")

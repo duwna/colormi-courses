@@ -19,6 +19,7 @@ import androidx.core.graphics.toRectF
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.duwna.colormi.R
 import com.duwna.colormi.extensions.dpToPx
+import com.google.type.TimeOfDay
 import kotlin.math.max
 
 class AvatarImageView @JvmOverloads constructor(
@@ -46,6 +47,7 @@ class AvatarImageView @JvmOverloads constructor(
 
     @Px
     var borderWidth: Float = context.dpToPx(DEFAULT_BORDER_WIDTH)
+
     @ColorInt
     private var borderColor: Int = Color.WHITE
     private var initials: String = "??"

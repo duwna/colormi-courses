@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
 import com.duwna.colormi.models.User
@@ -27,19 +26,16 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        bindActions()
+
         iv_avatar.isAvatarMode = false
 
-        AuthRepository.firebaseUser ?: findNavController().navigate(R.id.navigation_auth)
-
-        AuthRepository.getUserInfo(
-            onComplete = { user -> bindUserData(user) },
-            onError = { exception -> onError(exception) }
-        )
-
-        btn_sign_out.setOnClickListener {
-            AuthRepository.signOut()
-            findNavController().navigate(R.id.navigation_auth)
-        }
+        if (AuthRepository.firebaseUser != null) {
+            AuthRepository.getUserInfo(
+                onComplete = { user -> bindUserData(user) },
+                onError = { exception -> onError(exception) }
+            )
+        } else findNavController().navigate(R.id.action_profile_to_auth)
 
     }
 
@@ -60,5 +56,16 @@ class ProfileFragment : Fragment() {
             Snackbar.LENGTH_LONG
         ).show()
         exception?.printStackTrace()
+    }
+
+    private fun bindActions() {
+        btn_edit_profile.setOnClickListener {
+            findNavController().navigate(R.id.action_profile_to_edit)
+        }
+
+        btn_sign_out.setOnClickListener {
+            AuthRepository.signOut()
+            findNavController().navigate(R.id.action_profile_to_auth)
+        }
     }
 }
