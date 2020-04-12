@@ -3,30 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_all">
+    app:startDestination="@+id/navigation_search">
 
     <fragment
-        android:id="@+id/navigation_all"
-        android:name="com.duwna.colormi.ui.all.AllFragment"
-        android:label="@string/title_all"
-        tools:layout="@layout/fragment_all" />
+        android:id="@+id/navigation_search"
+        android:name="com.duwna.colormi.ui.search.SearchFragment"
+        android:label="Все курсы"
+        tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/navigation_bookmark"
         android:name="com.duwna.colormi.ui.bookmark.BookmarkFragment"
-        android:label="@string/title_bookmark"
+        android:label="Избранное"
         tools:layout="@layout/fragment_bookmark" />
 
     <fragment
         android:id="@+id/navigation_current"
         android:name="com.duwna.colormi.ui.current.CurrentFragment"
-        android:label="@string/title_current"
+        android:label="Текущие курсы"
         tools:layout="@layout/fragment_current" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.duwna.colormi.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
+        android:label="Профиль"
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profile_to_auth"
@@ -45,6 +45,7 @@
     </fragment>
 
     <fragment
+        android:label="Авторизация"
         android:id="@+id/navigation_auth"
         android:name="com.duwna.colormi.ui.auth.AuthFragment"
         tools:layout="@layout/fragment_authentication" >
@@ -66,16 +67,19 @@
     </fragment>
 
     <fragment
+        android:label="Регистрация"
         android:id="@+id/navigation_registration"
         android:name="com.duwna.colormi.ui.auth.RegistrationFragment"
         tools:layout="@layout/fragment_registration" />
 
     <fragment
+        android:label="Вход"
         android:id="@+id/navigation_enter"
         android:name="com.duwna.colormi.ui.auth.EnterFragment"
         tools:layout="@layout/fragment_enter" />
 
     <fragment
+        android:label="Редактирование профиля"
         android:id="@+id/editProfileFragment"
         android:name="com.duwna.colormi.ui.profile.EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile" />

@@ -2,22 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_all"
+        android:id="@+id/navigation_search"
         android:icon="@drawable/ic_search_24dp"
-        android:title="@string/title_all" />
+        android:title="Все курсы" />
 
     <item
         android:id="@+id/navigation_bookmark"
         android:icon="@drawable/ic_bookmark_24dp"
-        android:title="@string/title_bookmark" />
+        android:title="Избранные курсы" />
 
     <item
         android:id="@+id/navigation_current"
         android:icon="@drawable/ic_play_arrow_24dp"
-        android:title="@string/title_current" />
+        android:title="Текущие курсы" />
 
     <item android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person_24dp"
-        android:title="@string/title_profile"/>
+        android:title="Профиль"/>
 
 </menu>
