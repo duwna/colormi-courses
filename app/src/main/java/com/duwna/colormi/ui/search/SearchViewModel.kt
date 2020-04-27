@@ -1,13 +1,15 @@
 package com.duwna.colormi.ui.search
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.duwna.colormi.models.CourseItem
+import com.duwna.colormi.repositories.generateCourseItem
 
 class SearchViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is all curses Fragment"
+    val list = MutableLiveData<List<CourseItem>>().apply {
+        value = MutableList((10..50).random()) { generateCourseItem() }
     }
-    val text: LiveData<String> = _text
+
 }
+

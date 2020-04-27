@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.duwna.colormi.R
 import com.duwna.colormi.repositories.generateCourseItem
 import kotlinx.android.synthetic.main.fragment_search.*
 
 class SearchFragment : Fragment() {
+
+    val viewModel: SearchViewModel by viewModels()
 
     private val searchAdapter = SearchAdapter(
         {
@@ -36,8 +40,9 @@ class SearchFragment : Fragment() {
             adapter = searchAdapter
         }
 
-        val list = MutableList((10..50).random()) { generateCourseItem() }
-        searchAdapter.submitList(list)
+        viewModel.list.observe(viewLifecycleOwner, Observer {
+            searchAdapter.submitList(it)
+        })
     }
 
 }

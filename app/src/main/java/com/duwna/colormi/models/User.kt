@@ -12,5 +12,11 @@ data class User(
 val User.fullName: String
     get() = "$firstName $lastName"
 
-val User.initials: String
-    get() = "${firstName[0]}${lastName[0]}"
+val User.initials: String?
+    get() = try {
+        "${firstName[0]}${lastName[0]}"
+    } catch (e: IndexOutOfBoundsException) {
+        null
+    }
+
+

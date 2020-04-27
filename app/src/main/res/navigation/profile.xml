@@ -2,27 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_search">
-
-    <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.duwna.colormi.ui.search.SearchFragment"
-        android:label="Все курсы"
-        tools:layout="@layout/fragment_search" />
-
-    <fragment
-        android:id="@+id/navigation_bookmark"
-        android:name="com.duwna.colormi.ui.bookmark.BookmarkFragment"
-        android:label="Избранное"
-        tools:layout="@layout/fragment_bookmark" />
-
-    <fragment
-        android:id="@+id/navigation_current"
-        android:name="com.duwna.colormi.ui.current.CurrentFragment"
-        android:label="Текущие курсы"
-        tools:layout="@layout/fragment_current" />
-
+    app:startDestination="@+id/navigation_profile"
+    android:id="@+id/profile">
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.duwna.colormi.ui.profile.ProfileFragment"
@@ -81,7 +62,6 @@
     <fragment
         android:label="Редактирование профиля"
         android:id="@+id/editProfileFragment"
-        android:name="com.duwna.colormi.ui.profile.EditProfileFragment"
+        android:name="com.duwna.colormi.ui.profile.edit.EditProfileFragment"
         tools:layout="@layout/fragment_edit_profile" />
-
 </navigation>

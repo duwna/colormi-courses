@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_current"
+    android:id="@+id/news">
+    <fragment
+        android:id="@+id/navigation_current"
+        android:name="com.duwna.colormi.ui.news.NewsFragment"
+        android:label="Новости"
+        tools:layout="@layout/fragment_news" />
+</navigation>

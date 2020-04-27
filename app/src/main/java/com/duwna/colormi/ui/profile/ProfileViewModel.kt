@@ -1,40 +1,46 @@
 package com.duwna.colormi.ui.profile
 
 import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.duwna.colormi.base.BaseViewModel
+import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.Notify
 import com.duwna.colormi.models.User
-import com.duwna.colormi.repositories.AuthRepository
+import com.duwna.colormi.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProfileViewModel : ViewModel() {
-    val user = MutableLiveData<User>()
-    val error = MutableLiveData<Throwable>()
+class ProfileViewModel : BaseViewModel<ProfileState>(ProfileState()) {
+
+    private val repository = UserRepository()
 
     init {
-//        AuthRepository.getUserInfo(
-//            onComplete = { user.value = it }
-//        )
-//        AuthRepository.getUserInfoRealtime (
-//            onComplete = { user.value = it }
-//        )
         loadUser()
     }
 
     fun loadUser() {
-        viewModelScope.launch(Dispatchers.IO) {
+        updateState { it.copy(isLoading = true) }
+        viewModelScope.launch(Dispatchers.Unconfined) {
             try {
-                user.postValue(AuthRepository.getSuspendUserInfo(false))
+                val result = repository.getUserInfo()
+                updateState { it.copy(user = result.first, isLoading = false) }
+                Log.e("TAG", currentState.toString())
+                if (result.second) notify(Notify.InternetError())
             } catch (e: Throwable) {
-                error.postValue(e)
+                updateState { it.copy(isLoading = false) }
+                notify(Notify.Error())
+                e.printStackTrace()
             }
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        Log.e("TAG", "onCleared")
+    fun singOut() {
+        repository.signOut()
     }
+
 }
+
+data class ProfileState(
+    val user: User? = null,
+    val isLoading: Boolean = false
+) : IViewModelState

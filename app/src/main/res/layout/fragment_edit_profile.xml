@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorGrayLight"
-    tools:context=".ui.profile.EditProfileFragment">
+    tools:context=".ui.profile.edit.EditProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,31 +16,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
             <com.duwna.colormi.ui.custom.AvatarImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="16dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
-                android:elevation="4dp"
-               />
+                android:layout_marginTop="16dp"
+                android:elevation="4dp" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/iv_avatar"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="80dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_alignParentTop="true"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="2dp"
-                app:cardUseCompatPadding="true"
-                >
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -124,47 +121,11 @@
 
                     </FrameLayout>
 
-                    <TextView
-                        style="@style/text_view_auth"
-                        android:text="Пароль:" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/edit_text_round_corners">
-
-                        <EditText
-                            android:id="@+id/et_password"
-                            style="@style/edit_text_round"
-                            android:hint="Введите пароль..."
-                            android:imeOptions="actionNext"
-                            android:inputType="textPassword" />
-
-                    </FrameLayout>
-
-                    <TextView
-                        style="@style/text_view_auth"
-                        android:text="Подтвердите пароль:" />
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/edit_text_round_corners">
-
-                        <EditText
-                            android:id="@+id/et_re_password"
-                            style="@style/edit_text_round"
-                            android:hint="Введите пароль еще раз..."
-                            android:inputType="textPassword" />
-
-                    </FrameLayout>
 
                     <Button
-                        android:id="@+id/btn_register"
+                        android:id="@+id/btn_save"
                         style="@style/button_round"
-                        android:text="Зарегистрироваться" />
+                        android:text="Сохранить" />
 
                     <ProgressBar
                         android:id="@+id/progress_circular"
@@ -174,12 +135,15 @@
                         android:indeterminateTint="@android:color/black"
                         android:visibility="gone" />
 
+                    <Button
+                        android:id="@+id/btn_change_password"
+                        style="@style/button_round"
+                        android:text="Изменить пароль" />
+
+
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-
         </RelativeLayout>
-
-
     </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

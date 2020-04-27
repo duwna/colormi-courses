@@ -1,48 +1,32 @@
 package com.duwna.colormi.ui.custom
 
-import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.View
 import androidx.annotation.ColorInt
 import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.core.animation.doOnRepeat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.toRectF
-import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import com.duwna.colormi.R
 import com.duwna.colormi.extensions.dpToPx
-import com.google.type.TimeOfDay
 import kotlin.math.max
 
 class AvatarImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr), View.OnLongClickListener {
+) : AppCompatImageView(context, attrs, defStyleAttr) {
 
     companion object {
         private const val DEFAULT_BORDER_WIDTH = 2
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
         private const val DEFAULT_SIZE = 40
-
-        val bgColors = arrayOf(
-            Color.parseColor("#7BC862"),
-            Color.parseColor("#E17076"),
-            Color.parseColor("#FAA774"),
-            Color.parseColor("#6EC9CB"),
-            Color.parseColor("#65AADD"),
-            Color.parseColor("#A695E7"),
-            Color.parseColor("#EE7AAE"),
-            Color.parseColor("#2196F3")
-        )
     }
 
     @Px
@@ -59,7 +43,7 @@ class AvatarImageView @JvmOverloads constructor(
     private val borderRect = Rect()
     private var size = 0
 
-    var isAvatarMode = true
+    var isAvatarMode = false
         set(value) {
             field = value
             invalidate()
@@ -83,7 +67,6 @@ class AvatarImageView @JvmOverloads constructor(
             ta.recycle()
         }
         scaleType = ScaleType.CENTER_CROP
-        setOnLongClickListener(this)
         setup()
     }
 
@@ -162,23 +145,6 @@ class AvatarImageView @JvmOverloads constructor(
         if (isAvatarMode) prepareShader(width, height)
     }
 
-    override fun onLongClick(v: View?): Boolean {
-        val va = ValueAnimator.ofInt(width, width * 2).apply {
-            duration = 150
-            interpolator = FastOutSlowInInterpolator()
-            repeatMode = ValueAnimator.REVERSE
-            repeatCount = 1
-        }
-
-        va.addUpdateListener {
-            size = it.animatedValue as Int
-            requestLayout()
-        }
-        va.doOnRepeat { toggleMode() }
-        va.start()
-        return true
-    }
-
     fun setInitials(initials: String) {
         this.initials = initials
         if (!isAvatarMode) invalidate()
@@ -224,11 +190,11 @@ class AvatarImageView @JvmOverloads constructor(
     }
 
     private fun drawInitials(canvas: Canvas) {
-        initialsPaint.color = initialsToColor(initials)
+        initialsPaint.color = Color.WHITE
         canvas.drawOval(viewRect.toRectF(), initialsPaint)
 
         with(initialsPaint) {
-            color = Color.WHITE
+            color = Color.BLACK
             textAlign = Paint.Align.CENTER
             textSize = height * 0.33f
         }
@@ -240,14 +206,6 @@ class AvatarImageView @JvmOverloads constructor(
             viewRect.exactCenterY() - offsetY,
             initialsPaint
         )
-    }
-
-    private fun initialsToColor(letters: String): Int {
-        val byte = letters[0].toByte()
-        val len = bgColors.size
-        val deg = byte / len.toDouble()
-        val index = ((deg % 1) * len).toInt()
-        return bgColors[index]
     }
 
     private fun toggleMode() {
