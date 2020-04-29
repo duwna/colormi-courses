@@ -23,12 +23,10 @@ class EditProfileFragment : BaseFragment<EditProfileViewModel>() {
 
         btn_save.setOnClickListener {
             val user = User(
-                null,
                 et_email.text.toString(),
                 et_phone.text.toString(),
                 et_first_name.text.toString(),
-                et_last_name.text.toString(),
-                ""
+                et_last_name.text.toString()
             )
             viewModel.saveUser(user)
         }

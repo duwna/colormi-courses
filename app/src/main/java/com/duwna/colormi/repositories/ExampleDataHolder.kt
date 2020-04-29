@@ -1,5 +1,6 @@
 package com.duwna.colormi.repositories
 
+import com.duwna.colormi.models.Course
 import com.duwna.colormi.models.CourseItem
 import kotlin.random.Random
 
@@ -25,12 +26,24 @@ fun generateCourseItem(): CourseItem {
     val descriptionSize = (30..lorem.length / 4).random()
     val start = (0..lorem.length / 4).random()
     return CourseItem(
-        id = (0..Int.MAX_VALUE).random().toString(),
+        idCourse = (0..Int.MAX_VALUE).random().toString(),
         title = courseTitles[(courseTitles.indices).random()],
         type = courseTypes[(courseTypes.indices).random()],
         description = lorem.subSequence(start, start.plus(descriptionSize)).toString(),
         isBought = Random.nextBoolean(),
         isBookmarked = Random.nextBoolean(),
+        price = if (Random.nextBoolean()) (200..5000).random() else 0
+    )
+}
+
+fun generateCourse(): Course {
+    val descriptionSize = (30..lorem.length / 4).random()
+    val start = (0..lorem.length / 4).random()
+    return Course(
+        idCourse = (0..Int.MAX_VALUE).random().toString(),
+        title = courseTitles[(courseTitles.indices).random()],
+        type = courseTypes[(courseTypes.indices).random()],
+        description = lorem.subSequence(start, start.plus(descriptionSize)).toString(),
         price = if (Random.nextBoolean()) (200..5000).random() else 0
     )
 }

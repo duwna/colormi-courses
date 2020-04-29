@@ -1,5 +1,6 @@
 package com.duwna.colormi.repositories
 
+import com.duwna.colormi.base.BaseRepository
 import com.duwna.colormi.models.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
@@ -12,13 +13,12 @@ class UserRepository : BaseRepository() {
 
     suspend fun registerUser(user: User, password: String) {
         auth.createUserWithEmailAndPassword(user.email, password).await()
-        user.id = firebaseUser!!.uid
         insertUser(user)
     }
 
     private suspend fun insertUser(user: User) {
         database.collection("users")
-            .document(user.id!!)
+            .document(firebaseUser!!.uid)
             .set(user)
             .await()
     }

@@ -1,4 +1,4 @@
-package com.duwna.colormi.repositories
+package com.duwna.colormi.base
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestoreSettings

@@ -20,11 +20,10 @@ class ProfileViewModel : BaseViewModel<ProfileState>(ProfileState()) {
 
     fun loadUser() {
         updateState { it.copy(isLoading = true) }
-        viewModelScope.launch(Dispatchers.Unconfined) {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.getUserInfo()
                 updateState { it.copy(user = result.first, isLoading = false) }
-                Log.e("TAG", currentState.toString())
                 if (result.second) notify(Notify.InternetError())
             } catch (e: Throwable) {
                 updateState { it.copy(isLoading = false) }

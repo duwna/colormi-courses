@@ -1,48 +1,43 @@
 package com.duwna.colormi.ui.search
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.duwna.colormi.R
-import com.duwna.colormi.repositories.generateCourseItem
+import com.duwna.colormi.base.BaseFragment
+import com.duwna.colormi.base.IViewModelState
 import kotlinx.android.synthetic.main.fragment_search.*
 
-class SearchFragment : Fragment() {
+class SearchFragment : BaseFragment<SearchViewModel>() {
 
-    val viewModel: SearchViewModel by viewModels()
+    override val layout: Int = R.layout.fragment_search
+    override val viewModel: SearchViewModel by viewModels()
 
     private val searchAdapter = SearchAdapter(
-        {
+        onBuyClicked = {
 
         },
-        {
-
+        onBookmarkClicked = { courseItem, index ->
+            viewModel.handleBookmark(courseItem, index)
         }
     )
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_search, container, false)
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun setupViews() {
 
         rv_courses.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = searchAdapter
         }
 
-        viewModel.list.observe(viewLifecycleOwner, Observer {
-            searchAdapter.submitList(it)
-        })
+        swipe_refresh.setOnRefreshListener {
+            viewModel.loadCourses()
+        }
+    }
+
+    override fun subscribeOnState(state: IViewModelState) {
+        state as SearchState
+
+        swipe_refresh.isRefreshing = state.isLoading
+        searchAdapter.submitList(state.coursesList)
     }
 
 }

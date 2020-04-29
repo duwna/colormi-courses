@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_search_course.view.*
 
 class SearchAdapter(
     private val onBuyClicked: (item: CourseItem) -> Unit,
-    private val onBookmarkClicked: (item: CourseItem) -> Unit
+    private val onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
 ) : ListAdapter<CourseItem, SearchViewHolder>(SearchDiffCallBack()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -32,7 +32,7 @@ class SearchAdapter(
 class SearchDiffCallBack : DiffUtil.ItemCallback<CourseItem>() {
 
     override fun areItemsTheSame(oldItem: CourseItem, newItem: CourseItem): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem.idCourse == newItem.idCourse
     }
 
     override fun areContentsTheSame(oldItem: CourseItem, newItem: CourseItem): Boolean {
@@ -44,7 +44,7 @@ class SearchDiffCallBack : DiffUtil.ItemCallback<CourseItem>() {
 class SearchViewHolder(
     override val containerView: View,
     private val onBuyClicked: (item: CourseItem) -> Unit,
-    private val onBookmarkClicked: (item: CourseItem) -> Unit
+    private val onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(item: CourseItem) = containerView.run {
@@ -76,7 +76,7 @@ class SearchViewHolder(
                 if (item.isBookmarked) R.drawable.ic_bookmark_checked
                 else R.drawable.ic_bookmark_unchecked
             )
-            setOnClickListener { onBookmarkClicked(item) }
+            setOnClickListener { onBookmarkClicked(item, adapterPosition) }
         }
 
     }

@@ -18,7 +18,6 @@ class RegistrationFragment : BaseFragment<AuthViewModel>() {
 
         btn_register.setOnClickListener {
             val user = User(
-                null,
                 et_email.text.toString(),
                 et_phone.text.toString(),
                 et_first_name.text.toString(),

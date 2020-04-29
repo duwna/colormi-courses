@@ -1,5 +1,6 @@
 package com.duwna.colormi.ui.profile
 
+import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
@@ -33,6 +34,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun subscribeOnState(state: IViewModelState) {
         state as ProfileState
 
+        Log.e("TAF", state.user.toString())
         swipe_refresh.isRefreshing = state.isLoading
 
         tv_fullName.text = state.user?.fullName

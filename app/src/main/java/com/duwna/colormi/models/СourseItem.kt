@@ -1,7 +1,7 @@
 package com.duwna.colormi.models
 
 data class CourseItem(
-    val id: String = "",
+    val idCourse: String = "",
     val title: String = "",
     val type: String = "",
     val description: String = "",
