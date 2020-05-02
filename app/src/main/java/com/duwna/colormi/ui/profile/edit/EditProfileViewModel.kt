@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
 import com.duwna.colormi.base.Notify
-import com.duwna.colormi.models.User
+import com.duwna.colormi.models.database.User
 import com.duwna.colormi.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

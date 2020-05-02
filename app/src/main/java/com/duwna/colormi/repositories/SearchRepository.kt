@@ -1,18 +1,19 @@
 package com.duwna.colormi.repositories
 
 import com.duwna.colormi.base.BaseRepository
-import com.duwna.colormi.models.Bookmark
-import com.duwna.colormi.models.Course
 import com.duwna.colormi.models.CourseItem
-import com.duwna.colormi.models.toCourseItem
-import com.google.firebase.firestore.Source
+import com.duwna.colormi.models.database.Course
+import com.duwna.colormi.models.database.toCourseItem
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
+import java.io.IOException
+import java.net.InetSocketAddress
+import java.net.Socket
+import java.util.*
 
 class SearchRepository : BaseRepository() {
 
     suspend fun loadCourseItems(): Pair<List<CourseItem>, Boolean> {
-
         var isFromCache: Boolean
 
         val courses = database.collection("courses")
@@ -22,47 +23,48 @@ class SearchRepository : BaseRepository() {
             .documents
             .map { it.toObject<Course>()?.apply { idCourse = it.id } }
 
-        val boughtCourses = database.collection("purchases")
-            .whereEqualTo("idUser", firebaseUser!!.uid)
-            .get()
-            .await()
-            .documents
-            .map { it.id }
+        val userRef = database.collection("users")
+            .document(firebaseUserId)
 
-        val bookmarkCourses = database.collection("bookmarks")
-            .whereEqualTo("idUser", firebaseUser!!.uid)
-            .get()
-            .await()
-            .documents
-            .map { it.toObject<Bookmark>()?.idCourse }
+        val bookmarkedCourses = userRef.collection("bookmarks")
+            .get().await().documents.map { it.id }
+
+        val boughtCourses = userRef.collection("purchases")
+            .get().await().documents.map { it.id }
 
         return courses.map {
             it!!.toCourseItem(
                 it.idCourse in boughtCourses,
-                it.idCourse in bookmarkCourses
+                it.idCourse in bookmarkedCourses
             )
         } to isFromCache
     }
 
     suspend fun addToBookMarks(idCourse: String) {
-        database.collection("bookmarks")
-            .add(Bookmark(firebaseUser!!.uid, idCourse))
+        database.collection("users")
+            .document(firebaseUserId)
+            .collection("bookmarks")
+            .document(idCourse)
+            .set(mapOf("timestamp" to Date()))
             .await()
     }
 
     suspend fun deleteFromBookmarks(idCourse: String) {
-
-        val id = database.collection("bookmarks")
-            .whereEqualTo("idUser", firebaseUser!!.uid)
-            .whereEqualTo("idCourse", idCourse)
-            .get(Source.SERVER)
-            .await()
-            .documents[0]
-            .id
-
-        database.collection("bookmarks")
-            .document(id)
+        database.collection("users")
+            .document(firebaseUserId)
+            .collection("bookmarks")
+            .document(idCourse)
             .delete()
             .await()
+    }
+
+    private fun isOnline(): Boolean = try {
+        Socket().run {
+            connect(InetSocketAddress("8.8.8.8", 53), 1500)
+            close()
+        }
+        true
+    } catch (e: IOException) {
+        false
     }
 }

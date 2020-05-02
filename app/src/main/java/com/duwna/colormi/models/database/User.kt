@@ -1,4 +1,4 @@
-package com.duwna.colormi.models
+package com.duwna.colormi.models.database
 
 data class User(
     val email: String = "",

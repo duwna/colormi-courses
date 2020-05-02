@@ -1,13 +1,13 @@
 package com.duwna.colormi.ui.news
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.Fragment
 import com.duwna.colormi.R
+import kotlinx.android.synthetic.main.fragment_news.*
 
 class NewsFragment : Fragment() {
 
@@ -24,10 +24,15 @@ class NewsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_news, container, false)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        btn_switch.setOnClickListener {
+            AppCompatDelegate.setDefaultNightMode(
+                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
+                    AppCompatDelegate.MODE_NIGHT_NO
+                else AppCompatDelegate.MODE_NIGHT_YES
+            )
+        }
+    }
 }

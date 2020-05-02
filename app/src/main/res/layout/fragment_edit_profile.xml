@@ -5,7 +5,7 @@
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrayLight"
+    android:background="@color/color_background"
     tools:context=".ui.profile.edit.EditProfileFragment">
 
     <ScrollView
@@ -19,7 +19,10 @@
             <com.duwna.colormi.ui.custom.AvatarImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="100dp"
+                app:aiv_background_color="@color/color_card"
+                app:aiv_initials_color="@color/color_icon_on_card"
                 android:layout_height="100dp"
+                app:aiv_borderColor="@color/color_icon_on_card"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
@@ -27,6 +30,7 @@
                 android:elevation="4dp" />
 
             <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/color_card"
                 android:id="@+id/cardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,7 +50,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Имя:" />
 
                     <FrameLayout
@@ -65,7 +69,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Фамилия:" />
 
                     <FrameLayout
@@ -84,7 +88,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Телефон:" />
 
                     <FrameLayout
@@ -103,7 +107,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="E-mail:" />
 
                     <FrameLayout

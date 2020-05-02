@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorGrayLight"
+    android:background="@color/color_background"
     android:orientation="vertical">
 
     <ScrollView
@@ -16,6 +16,7 @@
             android:layout_height="wrap_content">
 
             <androidx.cardview.widget.CardView
+                app:cardBackgroundColor="@color/color_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
@@ -30,7 +31,7 @@
                     android:padding="16dp">
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Имя:" />
 
                     <FrameLayout
@@ -49,7 +50,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Фамилия:" />
 
                     <FrameLayout
@@ -68,7 +69,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Телефон:" />
 
                     <FrameLayout
@@ -87,7 +88,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="E-mail:" />
 
                     <FrameLayout
@@ -106,7 +107,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Пароль:" />
 
                     <FrameLayout
@@ -125,7 +126,7 @@
                     </FrameLayout>
 
                     <TextView
-                        style="@style/text_view_auth"
+                        style="@style/text_on_card"
                         android:text="Подтвердите пароль:" />
 
                     <FrameLayout

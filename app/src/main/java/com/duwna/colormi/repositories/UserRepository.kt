@@ -1,7 +1,7 @@
 package com.duwna.colormi.repositories
 
 import com.duwna.colormi.base.BaseRepository
-import com.duwna.colormi.models.User
+import com.duwna.colormi.models.database.User
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.tasks.await
 
@@ -18,14 +18,14 @@ class UserRepository : BaseRepository() {
 
     private suspend fun insertUser(user: User) {
         database.collection("users")
-            .document(firebaseUser!!.uid)
+            .document(firebaseUserId)
             .set(user)
             .await()
     }
 
     suspend fun updateUser(user: User) {
         database.collection("users")
-            .document(firebaseUser?.uid!!)
+            .document(firebaseUserId)
             .update(
                 mapOf(
                     "email" to user.email,
@@ -38,7 +38,7 @@ class UserRepository : BaseRepository() {
 
     suspend fun getUserInfo(): Pair<User, Boolean> {
         val result = database.collection("users")
-            .document(firebaseUser?.uid!!)
+            .document(firebaseUserId)
             .get()
             .await()
 

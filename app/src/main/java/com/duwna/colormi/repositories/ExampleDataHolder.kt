@@ -1,6 +1,6 @@
 package com.duwna.colormi.repositories
 
-import com.duwna.colormi.models.Course
+import com.duwna.colormi.models.database.Course
 import com.duwna.colormi.models.CourseItem
 import kotlin.random.Random
 

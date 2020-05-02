@@ -6,8 +6,8 @@ import androidx.fragment.app.viewModels
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
-import com.duwna.colormi.models.User
-import com.duwna.colormi.models.initials
+import com.duwna.colormi.models.database.User
+import com.duwna.colormi.models.database.initials
 import kotlinx.android.synthetic.main.fragment_edit_profile.*
 
 class EditProfileFragment : BaseFragment<EditProfileViewModel>() {

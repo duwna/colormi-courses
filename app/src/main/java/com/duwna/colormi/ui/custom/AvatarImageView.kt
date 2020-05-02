@@ -7,7 +7,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
-import androidx.annotation.Dimension
 import androidx.annotation.DrawableRes
 import androidx.annotation.Px
 import androidx.appcompat.widget.AppCompatImageView
@@ -27,14 +26,18 @@ class AvatarImageView @JvmOverloads constructor(
         private const val DEFAULT_BORDER_WIDTH = 2
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
         private const val DEFAULT_SIZE = 40
+        private const val DEFAULT_BACKGROUND_COLOR = Color.TRANSPARENT
+        private const val DEFAULT_INITIALS_COLOR = Color.GRAY
     }
 
     @Px
     var borderWidth: Float = context.dpToPx(DEFAULT_BORDER_WIDTH)
 
     @ColorInt
-    private var borderColor: Int = Color.WHITE
+    private var borderColor: Int = DEFAULT_BORDER_COLOR
     private var initials: String = "??"
+    private var backgroundInitialsColor = DEFAULT_BACKGROUND_COLOR
+    private var initialsColor = DEFAULT_INITIALS_COLOR
 
     private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val avatarPaint = Paint(Paint.ANTI_ALIAS_FLAG)
@@ -62,6 +65,16 @@ class AvatarImageView @JvmOverloads constructor(
                     R.styleable.AvatarImageView_aiv_borderColor,
                     DEFAULT_BORDER_COLOR
                 )
+
+            backgroundInitialsColor = ta.getColor(
+                R.styleable.AvatarImageView_aiv_background_color,
+                DEFAULT_BACKGROUND_COLOR
+            )
+
+            initialsColor = ta.getColor(
+                R.styleable.AvatarImageView_aiv_initials_color,
+                DEFAULT_INITIALS_COLOR
+            )
 
             initials = ta.getString(R.styleable.AvatarImageView_aiv_initials) ?: "??"
             ta.recycle()
@@ -104,31 +117,6 @@ class AvatarImageView @JvmOverloads constructor(
         canvas.drawOval(borderRect.toRectF(), borderPaint)
     }
 
-    override fun onSaveInstanceState(): Parcelable? {
-        val savedState = SavedState(super.onSaveInstanceState())
-        with(savedState) {
-            ssIsAvatarMode = isAvatarMode
-            ssBorderWidth = borderWidth
-            ssBorderColor = borderColor
-        }
-        return savedState
-    }
-
-    override fun onRestoreInstanceState(state: Parcelable) {
-        super.onRestoreInstanceState(state)
-        if (state is SavedState) {
-            state.also {
-                isAvatarMode = it.ssIsAvatarMode
-                borderWidth = it.ssBorderWidth
-                borderColor = it.ssBorderColor
-            }
-
-            with(borderPaint) {
-                color = borderColor
-                strokeWidth = borderWidth
-            }
-        }
-    }
 
     override fun setImageBitmap(bm: Bitmap) {
         super.setImageBitmap(bm)
@@ -148,18 +136,6 @@ class AvatarImageView @JvmOverloads constructor(
     fun setInitials(initials: String) {
         this.initials = initials
         if (!isAvatarMode) invalidate()
-    }
-
-    fun setBorderColor(@ColorInt color: Int) {
-        borderColor = color
-        borderPaint.color = borderColor
-        invalidate()
-    }
-
-    fun setBorderWidth(@Dimension width: Int) {
-        borderWidth = context.dpToPx(width)
-        borderPaint.strokeWidth = borderWidth
-        invalidate()
     }
 
     private fun setup() {
@@ -190,11 +166,11 @@ class AvatarImageView @JvmOverloads constructor(
     }
 
     private fun drawInitials(canvas: Canvas) {
-        initialsPaint.color = Color.WHITE
+        initialsPaint.color = backgroundInitialsColor
         canvas.drawOval(viewRect.toRectF(), initialsPaint)
 
         with(initialsPaint) {
-            color = Color.BLACK
+            color = initialsColor
             textAlign = Paint.Align.CENTER
             textSize = height * 0.33f
         }
@@ -208,38 +184,4 @@ class AvatarImageView @JvmOverloads constructor(
         )
     }
 
-    private fun toggleMode() {
-        isAvatarMode = !isAvatarMode
-        invalidate()
-    }
-
-    private class SavedState : BaseSavedState, Parcelable {
-        var ssIsAvatarMode: Boolean = true
-        var ssBorderWidth: Float = 0f
-        var ssBorderColor: Int = 0
-
-        constructor(superState: Parcelable?) : super(superState)
-
-        constructor(src: Parcel) : super(src) {
-            //restore state from parcel
-            ssIsAvatarMode = src.readInt() == 1
-            ssBorderWidth = src.readFloat()
-            ssBorderColor = src.readInt()
-        }
-
-        override fun writeToParcel(dst: Parcel, flags: Int) {
-            //write state to parcel
-            super.writeToParcel(dst, flags)
-            dst.writeInt(if (ssIsAvatarMode) 1 else 0)
-            dst.writeFloat(ssBorderWidth)
-            dst.writeInt(ssBorderColor)
-        }
-
-        override fun describeContents() = 0
-
-        companion object CREATOR : Parcelable.Creator<SavedState> {
-            override fun createFromParcel(parcel: Parcel) = SavedState(parcel)
-            override fun newArray(size: Int): Array<SavedState?> = arrayOfNulls(size)
-        }
-    }
 }

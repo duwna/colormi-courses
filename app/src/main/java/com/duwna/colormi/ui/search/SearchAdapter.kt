@@ -20,11 +20,11 @@ class SearchAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
         val containerView = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_search_course, parent, false)
-        return SearchViewHolder(containerView, onBuyClicked, onBookmarkClicked)
+        return SearchViewHolder(containerView)
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), onBuyClicked, onBookmarkClicked)
     }
 
 }
@@ -39,15 +39,22 @@ class SearchDiffCallBack : DiffUtil.ItemCallback<CourseItem>() {
         return oldItem == newItem
     }
 
+    override fun getChangePayload(oldItem: CourseItem, newItem: CourseItem): Any? {
+        return if (oldItem.isBookmarked != newItem.isBookmarked || oldItem.isBought != newItem.isBought) Unit
+        else super.getChangePayload(oldItem, newItem)
+    }
 }
 
 class SearchViewHolder(
-    override val containerView: View,
-    private val onBuyClicked: (item: CourseItem) -> Unit,
-    private val onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
+    override val containerView: View
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
-    fun bind(item: CourseItem) = containerView.run {
+    fun bind(
+        item: CourseItem,
+        onBuyClicked: (item: CourseItem) -> Unit,
+        onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
+    ) = containerView.run {
+
         tv_title.text = item.title
         tv_description.text = item.description
         tv_type.text = item.type
@@ -78,7 +85,7 @@ class SearchViewHolder(
             )
             setOnClickListener { onBookmarkClicked(item, adapterPosition) }
         }
-
     }
+
 
 }

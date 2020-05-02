@@ -6,8 +6,8 @@ import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
-import com.duwna.colormi.models.fullName
-import com.duwna.colormi.models.initials
+import com.duwna.colormi.models.database.fullName
+import com.duwna.colormi.models.database.initials
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment<ProfileViewModel>() {

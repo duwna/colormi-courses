@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
-import com.duwna.colormi.models.User
+import com.duwna.colormi.models.database.User
 import kotlinx.android.synthetic.main.fragment_registration.*
 
 class RegistrationFragment : BaseFragment<AuthViewModel>() {

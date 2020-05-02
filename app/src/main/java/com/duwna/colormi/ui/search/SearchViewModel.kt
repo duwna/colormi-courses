@@ -38,9 +38,7 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
                 if (!courseItem.isBookmarked) repository.addToBookMarks(courseItem.idCourse)
                 else repository.deleteFromBookmarks(courseItem.idCourse)
 
-                val newList = currentState
-                    .coursesList
-                    .toMutableList()
+                val newList = currentState.coursesList.toMutableList()
                     .also { it[index] = courseItem.copy(isBookmarked = !courseItem.isBookmarked) }
 
                 updateState { it.copy(coursesList = newList, isLoading = false) }
@@ -54,6 +52,7 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
             } catch (e: Throwable) {
                 updateState { it.copy(isLoading = false) }
                 notify(Notify.InternetError())
+                e.printStackTrace()
             }
         }
     }
