@@ -3,6 +3,7 @@ package com.duwna.colormi.ui.profile
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
@@ -34,11 +35,20 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun subscribeOnState(state: IViewModelState) {
         state as ProfileState
 
-        Log.e("TAF", state.user.toString())
         swipe_refresh.isRefreshing = state.isLoading
 
-        tv_fullName.text = state.user?.fullName
-        tv_email.text = state.user?.email
-        iv_avatar.setInitials(state.user?.initials ?: "")
+        state.user?.let { user ->
+            tv_fullName.text = user.fullName
+            tv_email.text = user.email
+            iv_avatar.setInitials(user.initials ?: "")
+
+            Log.e("TAG", user.toString())
+            user.avatarUrl?.let {
+                iv_avatar.isAvatarMode = true
+                Glide.with(root)
+                    .load(it)
+                    .into(iv_avatar)
+            } ?: run { iv_avatar.isAvatarMode = false }
+        }
     }
 }

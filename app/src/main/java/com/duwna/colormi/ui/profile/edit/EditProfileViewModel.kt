@@ -1,5 +1,6 @@
 package com.duwna.colormi.ui.profile.edit
 
+import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
@@ -71,6 +72,20 @@ class EditProfileViewModel : BaseViewModel<EditProfileState>(
             }
         }
         return true
+    }
+
+    fun uploadImage(imageUri: Uri?) {
+        notify(Notify.TextMessage("Загрузка изображения..."))
+        imageUri ?: return
+        updateState { it.copy(isLoading = true) }
+        viewModelScope.launch {
+            try {
+                repository.uploadImage(imageUri)
+            } catch (t: Throwable) {
+                notify(Notify.Error())
+            }
+            loadUser()
+        }
     }
 }
 

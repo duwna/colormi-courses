@@ -5,6 +5,11 @@ import com.duwna.colormi.models.CourseItem
 import com.duwna.colormi.models.database.Course
 import com.duwna.colormi.models.database.toCourseItem
 import com.google.firebase.firestore.ktx.toObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.tasks.await
 import java.io.IOException
 import java.net.InetSocketAddress

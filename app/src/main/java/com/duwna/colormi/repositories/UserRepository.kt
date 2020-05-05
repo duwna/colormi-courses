@@ -1,11 +1,24 @@
 package com.duwna.colormi.repositories
 
+import android.net.Uri
+import android.util.Log
 import com.duwna.colormi.base.BaseRepository
+import com.duwna.colormi.extensions.tryOrNull
 import com.duwna.colormi.models.database.User
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 
 class UserRepository : BaseRepository() {
+
+    private val storage = Firebase.storage.reference
+
+    suspend fun uploadImage(uri: Uri) {
+        storage.child("avatars/$firebaseUserId")
+            .putFile(uri)
+            .await()
+    }
 
     suspend fun authUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password).await()
@@ -14,13 +27,6 @@ class UserRepository : BaseRepository() {
     suspend fun registerUser(user: User, password: String) {
         auth.createUserWithEmailAndPassword(user.email, password).await()
         insertUser(user)
-    }
-
-    private suspend fun insertUser(user: User) {
-        database.collection("users")
-            .document(firebaseUserId)
-            .set(user)
-            .await()
     }
 
     suspend fun updateUser(user: User) {
@@ -42,8 +48,25 @@ class UserRepository : BaseRepository() {
             .get()
             .await()
 
-        return result.toObject<User>()!! to result.metadata.isFromCache
+        var user = result.toObject<User>()!!
+        if (!result.metadata.isFromCache) user = user.copy(avatarUrl = getImageUrl())
+
+        return user to result.metadata.isFromCache
     }
 
     fun signOut() = auth.signOut()
+
+    private suspend fun getImageUrl(): String? = tryOrNull {
+        storage.child("avatars/$firebaseUserId")
+            .downloadUrl
+            .await()
+            .toString().also { Log.e("!!!!!!!!", it) }
+    }
+
+    private suspend fun insertUser(user: User) {
+        database.collection("users")
+            .document(firebaseUserId)
+            .set(user)
+            .await()
+    }
 }

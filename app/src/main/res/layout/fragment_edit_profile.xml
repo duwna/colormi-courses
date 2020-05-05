@@ -16,6 +16,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageView
+                android:layout_alignEnd="@id/iv_avatar"
+                android:layout_alignBottom="@id/iv_avatar"
+                android:layout_width="24dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
+                android:elevation="6dp"
+                android:layout_height="24dp"
+                android:tint="@color/color_icon_on_card"
+                android:src="@drawable/ic_insert_photo_black_24dp"/>
+
+
             <com.duwna.colormi.ui.custom.AvatarImageView
                 android:id="@+id/iv_avatar"
                 android:layout_width="100dp"
@@ -28,6 +40,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
                 android:elevation="4dp" />
+
 
             <androidx.cardview.widget.CardView
                 app:cardBackgroundColor="@color/color_card"

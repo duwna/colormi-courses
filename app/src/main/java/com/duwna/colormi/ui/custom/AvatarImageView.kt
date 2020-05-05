@@ -35,7 +35,7 @@ class AvatarImageView @JvmOverloads constructor(
 
     @ColorInt
     private var borderColor: Int = DEFAULT_BORDER_COLOR
-    private var initials: String = "??"
+    private var initials: String = ""
     private var backgroundInitialsColor = DEFAULT_BACKGROUND_COLOR
     private var initialsColor = DEFAULT_INITIALS_COLOR
 
@@ -76,7 +76,7 @@ class AvatarImageView @JvmOverloads constructor(
                 DEFAULT_INITIALS_COLOR
             )
 
-            initials = ta.getString(R.styleable.AvatarImageView_aiv_initials) ?: "??"
+            initials = ta.getString(R.styleable.AvatarImageView_aiv_initials) ?: ""
             ta.recycle()
         }
         scaleType = ScaleType.CENTER_CROP
