@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Colormi</string>
+    <string name="title_news">Новости</string>
+    <string name="title_search">Все курсы</string>
+    <string name="title_bookmark">Избранные курсы</string>
+    <string name="title_profile">Профиль</string>
+    <string name="title_current">title_current</string>
 </resources>

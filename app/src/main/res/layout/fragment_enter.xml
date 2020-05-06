@@ -1,89 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_background"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
 
-    <ScrollView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        app:cardBackgroundColor="@color/color_card"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
 
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <androidx.cardview.widget.CardView
+            <TextView
+                style="@style/text_on_card"
+                android:text="E-mail:" />
+
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:cardBackgroundColor="@color/color_card"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true">
+                android:background="@drawable/edit_text_round_corners">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                <EditText
+                    android:id="@+id/et_email"
+                    style="@style/edit_text_round"
+                    android:hint="Введите E-mail..."
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress" />
+            </FrameLayout>
 
-                    <TextView
-                        style="@style/text_on_card"
-                        android:text="E-mail:" />
+            <TextView
+                style="@style/text_on_card"
+                android:text="Пароль:" />
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/edit_text_round_corners">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@drawable/edit_text_round_corners">
 
-                        <EditText
-                            android:id="@+id/et_email"
-                            style="@style/edit_text_round"
-                            android:hint="Введите E-mail..."
-                            android:imeOptions="actionNext"
-                            android:inputType="textEmailAddress" />
-                    </FrameLayout>
+                <EditText
+                    android:id="@+id/et_password"
+                    style="@style/edit_text_round"
+                    android:hint="Введите пароль..."
+                    android:imeOptions="actionDone"
+                    android:inputType="textPassword" />
 
-                    <TextView
-                        style="@style/text_on_card"
-                        android:text="Пароль:" />
+            </FrameLayout>
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp"
-                        android:background="@drawable/edit_text_round_corners">
+            <Button
+                android:id="@+id/btn_enter"
+                style="@style/button_round"
+                android:text="Войти" />
 
-                        <EditText
-                            android:id="@+id/et_password"
-                            style="@style/edit_text_round"
-                            android:hint="Введите пароль..."
-                            android:imeOptions="actionDone"
-                            android:inputType="textPassword" />
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:indeterminateTint="@android:color/black"
+                android:visibility="gone" />
 
-                    </FrameLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-                    <Button
-                        android:id="@+id/btn_enter"
-                        style="@style/button_round"
-                        android:text="Войти" />
-
-                    <ProgressBar
-                        android:id="@+id/progress_circular"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:indeterminateTint="@android:color/black"
-                        android:visibility="gone" />
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-        </FrameLayout>
-
-
-    </ScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.core.widget.NestedScrollView>

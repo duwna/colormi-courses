@@ -13,10 +13,6 @@ class ProfileViewModel : BaseViewModel<ProfileState>(ProfileState()) {
 
     private val repository = UserRepository()
 
-    init {
-        loadUser()
-    }
-
     fun loadUser() {
         updateState { it.copy(isLoading = true) }
         viewModelScope.launch(Dispatchers.IO) {

@@ -51,4 +51,9 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             } ?: run { iv_avatar.isAvatarMode = false }
         }
     }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadUser()
+    }
 }
