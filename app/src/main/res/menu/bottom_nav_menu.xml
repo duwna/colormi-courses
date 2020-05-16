@@ -17,12 +17,6 @@
         android:icon="@drawable/ic_play_arrow_24dp"
         android:title="@string/title_current" />
 
-    <item
-        android:id="@+id/navigation_bookmark"
-        android:icon="@drawable/ic_bookmark_24dp"
-        android:title="@string/title_bookmark" />
-
-
 
     <item android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_person_24dp"

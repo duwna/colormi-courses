@@ -1,6 +1,7 @@
 package com.duwna.colormi
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_news,
                 R.id.navigation_search,
                 R.id.navigation_current,
-                R.id.navigation_bookmark,
                 R.id.navigation_profile
             )
         )
@@ -54,4 +54,5 @@ class MainActivity : AppCompatActivity() {
         }
         snackbar.show()
     }
+
 }

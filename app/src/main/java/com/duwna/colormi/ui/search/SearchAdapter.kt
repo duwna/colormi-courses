@@ -13,7 +13,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_search_course.view.*
 
 class SearchAdapter(
-    private val onBuyClicked: (item: CourseItem) -> Unit,
+    private val onItemClicked: (item: CourseItem) -> Unit,
     private val onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
 ) : ListAdapter<CourseItem, SearchViewHolder>(SearchDiffCallBack()) {
 
@@ -24,7 +24,7 @@ class SearchAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        holder.bind(getItem(position), onBuyClicked, onBookmarkClicked)
+        holder.bind(getItem(position), onItemClicked, onBookmarkClicked)
     }
 
 }
@@ -51,7 +51,7 @@ class SearchViewHolder(
 
     fun bind(
         item: CourseItem,
-        onBuyClicked: (item: CourseItem) -> Unit,
+        onItemClicked: (item: CourseItem) -> Unit,
         onBookmarkClicked: (item: CourseItem, index: Int) -> Unit
     ) = containerView.run {
 
@@ -59,7 +59,7 @@ class SearchViewHolder(
         tv_description.text = item.description
         tv_type.text = item.type
 
-        btn_buy.run {
+        tv_buy.run {
             if (item.isBought) {
                 background = context.getDrawable(R.drawable.button_round_corners_white)
                 setTextColor(Color.BLACK)
@@ -71,11 +71,11 @@ class SearchViewHolder(
                 isClickable = true
                 text = when (item.price) {
                     0 -> "Бесплатно"
-                    else -> "Купить"
+                    else -> "${item.price} ₽"
                 }
             }
 
-            setOnClickListener { onBuyClicked(item) }
+            setOnClickListener { onItemClicked(item) }
         }
 
         iv_bookmark.run {

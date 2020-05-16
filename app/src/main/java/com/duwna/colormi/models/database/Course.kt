@@ -10,7 +10,7 @@ data class Course(
     val price: Int = 0
 )
 
-fun Course.toCourseItem(isBought: Boolean, isBookmarked: Boolean): CourseItem =
+fun Course.toCourseItem(isBought: Boolean = false, isBookmarked: Boolean = false): CourseItem =
     CourseItem(
         idCourse!!,
         title,

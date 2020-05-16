@@ -56,9 +56,24 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
             }
         }
     }
+
+    fun handleOnlyBookmarked() {
+        updateState { it.copy(isOnlyBookmarked = !currentState.isOnlyBookmarked) }
+    }
 }
 
 data class SearchState(
     val coursesList: List<CourseItem> = emptyList(),
-    val isLoading: Boolean = false
-) : IViewModelState
+    val isLoading: Boolean = false,
+    val isOnlyBookmarked: Boolean = false,
+    val searchQuery: String = ""
+) : IViewModelState {
+
+    fun showCurses(): List<CourseItem> = coursesList.filter { needToShow(it) }
+
+    private fun needToShow(courseItem: CourseItem): Boolean {
+        if (isOnlyBookmarked && !courseItem.isBookmarked) return false
+        if (searchQuery.isNotBlank() && !courseItem.title.contains(searchQuery)) return false
+        return true
+    }
+}

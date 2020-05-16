@@ -5,11 +5,6 @@ import com.duwna.colormi.models.CourseItem
 import com.duwna.colormi.models.database.Course
 import com.duwna.colormi.models.database.toCourseItem
 import com.google.firebase.firestore.ktx.toObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.reduce
 import kotlinx.coroutines.tasks.await
 import java.io.IOException
 import java.net.InetSocketAddress
@@ -27,6 +22,8 @@ class SearchRepository : BaseRepository() {
             .apply { isFromCache = metadata.isFromCache }
             .documents
             .map { it.toObject<Course>()?.apply { idCourse = it.id } }
+
+        if (auth.currentUser == null) return courses.map { it!!.toCourseItem() } to isFromCache
 
         val userRef = database.collection("users")
             .document(firebaseUserId)
