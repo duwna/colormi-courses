@@ -25,7 +25,7 @@ jobs:
           destination: apks/
       - deploy: 
           command: |
-            rm ./gdrive/token_v2.json 
+            rm ~./gdrive/token_v2.json 
             gdrive about
             curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"; chmod +x gdrive
             ./gdrive --refresh-token "refresh_token_value" upload --parent "parent_id" app/build/outputs/apk/app-debug.apk
