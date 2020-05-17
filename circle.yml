@@ -23,3 +23,22 @@ jobs:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/outputs/apk/
           destination: apks/
+       deploy:
+      - run: 
+          command: 
+            curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download";
+            chmod +x gdrive;
+            ./gdrive --refresh-token "refresh_token_value" upload --parent "parent_id" app/build/outputs/apk/app-debug.apk
+
+#        - run:
+#         name: install sendEmail
+#         command: emerge -av net-mail/sendEmail
+#       - run:
+#         name: send email with apk
+#         command: sendEmail -f from_mail@gmail.com -t mercy.obiivion@gmail.com -o message-charset=utf-8 -u "Test messege from ubuntu" 
+#-m "Too eezy for arteezy" -s smtp.gmail.com -xu from_mail@gmail.com -xp PASSWORD 
+#-l log_file.txt -a photo_1.jpeg photo_2.jpeg
+
+
+# echo "some text here to send it...." | mailx -s "My_subject_is_here" -b bcc_user1@example.com -c cc_user1@example.com -r sender_user1@example.com recipient_user1@example.com
+
