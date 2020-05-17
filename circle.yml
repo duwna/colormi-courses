@@ -23,7 +23,6 @@ jobs:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/outputs/apk/
           destination: apks/
-       deploy:
       - run: 
           command: 
             curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download";
