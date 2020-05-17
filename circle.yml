@@ -23,10 +23,9 @@ jobs:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/outputs/apk/debug/
           destination: apks/
-          
-#      - run: 
-#             name: send email with apk
-#             command: curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'MERCY.ObIivion@gmail.com' --mail-rcpt 'khabonera@gmail.com' --upload-file app/build/outputs/apk/apks/app-debug.apk --user 'MERCY.ObIivion@gmail.com:Dinler2015'
+      - run: 
+             name: send email with apk
+             command: curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'MERCY.ObIivion@gmail.com' --mail-rcpt 'khabonera@gmail.com' --upload-file ~/code/app/build/outputs/apk/debug/apks/app-debug.apk --user 'MERCY.ObIivion@gmail.com:Dinler2015'
              
 #            curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"; chmod +x gdrive
 #            ./gdrive about
