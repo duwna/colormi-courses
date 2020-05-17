@@ -16,10 +16,10 @@ class CurrentFragment : BaseFragment<CurrentViewModel>() {
 
     private val currentAdapter = CurrentAdapter(
         onWatchClicked = {
-            showVideo(it.videoUrl)
+            openIntent(it.videoUrl)
         },
         onDownloadClicked = {
-
+            openIntent(it.documentUrl)
         }
     )
 
@@ -40,11 +40,8 @@ class CurrentFragment : BaseFragment<CurrentViewModel>() {
         currentAdapter.submitList(state.coursesList)
     }
 
-
-    private fun showVideo(url: String) {
-        val intent = Intent(Intent.ACTION_VIEW)
-        intent.setDataAndType(Uri.parse(url), "video/*")
-        startActivity(intent)
+    private fun openIntent(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
     }
 
     override fun onResume() {

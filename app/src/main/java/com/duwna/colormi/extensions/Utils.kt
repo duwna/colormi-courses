@@ -1,12 +1,11 @@
 package com.duwna.colormi.extensions
 
-import android.content.Context
-import android.util.TypedValue
 import android.view.View
 import android.view.ViewAnimationUtils
 import androidx.core.animation.doOnEnd
 import androidx.core.animation.doOnStart
 import androidx.core.view.isVisible
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -38,3 +37,17 @@ fun getDayDifference(date1: Date, date2: Date): Int {
     val diff = date2.time - date1.time
     return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS).toInt()
 }
+
+fun daysLeftToString(daysLeft: Int) =
+    if (daysLeft in 11..14) "Осталось\n$daysLeft дней"
+    else when (daysLeft % 10) {
+        1 -> "Остался\n$daysLeft день"
+        in 2..4 -> "Осталось\n$daysLeft дня"
+        else -> "Осталось\n$daysLeft дней"
+    }
+
+fun Date.format(pattern: String = "HH:mm dd.MM"): String {
+    val dateFormat = SimpleDateFormat(pattern, Locale("ru"))
+    return dateFormat.format(this)
+}
+

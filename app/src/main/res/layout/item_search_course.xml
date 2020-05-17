@@ -59,7 +59,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_description"
+            android:id="@+id/tv_text"
             tools:text="Описание описание описание описание описание описание описание описание описание описание описание описание описание..."
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_description" />
+            app:layout_constraintStart_toEndOf="@+id/tv_text" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,7 +56,7 @@ class SearchViewHolder(
     ) = containerView.run {
 
         tv_title.text = item.title
-        tv_description.text = item.description
+        tv_text.text = item.description
         tv_type.text = item.type
 
         tv_buy.run {

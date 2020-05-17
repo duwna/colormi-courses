@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.duwna.colormi.R
+import com.duwna.colormi.extensions.daysLeftToString
 import com.duwna.colormi.models.CurrentCourseItem
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_current_course.view.*
@@ -50,13 +51,11 @@ class CurrentViewHolder(
     ) = containerView.run {
 
         tv_title.text = item.title
-        tv_description.text = item.description
+        tv_text.text = item.description
         tv_type.text = item.type
-        tv_days.text = "Осталось\n${item.daysLeft} дней"
+        tv_date.text = daysLeftToString(item.daysLeft)
 
         btn_watch.setOnClickListener { onWatchClicked(item) }
         btn_download.setOnClickListener { onDownloadClicked(item) }
     }
-
-
 }

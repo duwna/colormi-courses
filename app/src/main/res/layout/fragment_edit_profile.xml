@@ -30,6 +30,7 @@
 
             <com.duwna.colormi.ui.custom.AvatarImageView
                 android:id="@+id/iv_avatar"
+                android:scaleType="centerCrop"
                 android:layout_width="100dp"
                 app:aiv_background_color="@color/color_card"
                 app:aiv_initials_color="@color/color_icon_on_card"

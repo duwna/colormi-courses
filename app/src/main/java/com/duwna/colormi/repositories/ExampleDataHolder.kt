@@ -2,6 +2,8 @@ package com.duwna.colormi.repositories
 
 import com.duwna.colormi.models.SearchCourseItem
 import com.duwna.colormi.models.database.Course
+import com.duwna.colormi.models.database.News
+import java.util.*
 import kotlin.random.Random
 
 val courseTitles = listOf(
@@ -55,6 +57,17 @@ fun generateCourse(): Course {
         price = if (Random.nextBoolean()) (200..5000).random() else 0,
         imgUrl = imgUrls[imgUrls.indices.random()],
         rating = (3 + Math.random() * 2).toFloat()
+    )
+}
+
+fun generateNews() : News {
+    val descriptionSize = (100..lorem.length / 4).random()
+    val start = (0..lorem.length / 4).random()
+    return News(
+        title = courseTitles[(courseTitles.indices).random()],
+        text = lorem.subSequence(start, start.plus(descriptionSize)).toString(),
+        timestamp = Date(),
+        imgUrl = imgUrls[imgUrls.indices.random()]
     )
 }
 

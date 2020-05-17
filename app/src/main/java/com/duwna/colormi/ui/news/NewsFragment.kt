@@ -1,38 +1,34 @@
 package com.duwna.colormi.ui.news
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.duwna.colormi.R
+import com.duwna.colormi.base.BaseFragment
+import com.duwna.colormi.base.IViewModelState
 import kotlinx.android.synthetic.main.fragment_news.*
 
-class NewsFragment : Fragment() {
+class NewsFragment : BaseFragment<NewsViewModel>() {
 
-    companion object {
-        fun newInstance() = NewsFragment()
-    }
+    override val viewModel: NewsViewModel by viewModels()
+    override val layout: Int = R.layout.fragment_news
 
-    private lateinit var viewModel: NewsViewModel
+    private val newsAdapter = NewsAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_news, container, false)
-    }
+    override fun setupViews() {
+        rv_news.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = newsAdapter
+        }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        btn_switch.setOnClickListener {
-            AppCompatDelegate.setDefaultNightMode(
-                if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-                    AppCompatDelegate.MODE_NIGHT_NO
-                else AppCompatDelegate.MODE_NIGHT_YES
-            )
+        swipe_refresh.setOnRefreshListener {
+            viewModel.loadNews()
         }
     }
+
+    override fun subscribeOnState(state: IViewModelState) {
+        state as NewsState
+        swipe_refresh.isRefreshing = state.isLoading
+        newsAdapter.submitList(state.newsList)
+    }
+
 }

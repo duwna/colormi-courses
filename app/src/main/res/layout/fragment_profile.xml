@@ -38,6 +38,7 @@
 
                     <com.duwna.colormi.ui.custom.AvatarImageView
                         android:id="@+id/iv_avatar"
+                        android:scaleType="centerCrop"
                         android:layout_width="70dp"
                         app:aiv_initials_color="@color/color_icon_on_card"
                         android:layout_height="70dp"
