@@ -14,9 +14,6 @@ import java.util.*
 class SearchRepository : BaseRepository() {
 
     suspend fun loadCourseItems(): Pair<List<SearchCourseItem>, Boolean> {
-//        repeat(40) {
-//            database.collection("courses").add(generateCourse())
-//        }
 
         var isFromCache: Boolean
 
@@ -70,6 +67,7 @@ class SearchRepository : BaseRepository() {
     }
 
     suspend fun addToBookMarks(idCourse: String) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .collection("bookmarks")
@@ -79,6 +77,7 @@ class SearchRepository : BaseRepository() {
     }
 
     suspend fun deleteFromBookmarks(idCourse: String) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .collection("bookmarks")
@@ -88,6 +87,7 @@ class SearchRepository : BaseRepository() {
     }
 
     suspend fun addToBought(idCourse: String) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .collection("purchases")
@@ -97,6 +97,7 @@ class SearchRepository : BaseRepository() {
     }
 
     suspend fun deleteFromBought(idCourse: String) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .collection("purchases")

@@ -3,6 +3,7 @@ package com.duwna.colormi.ui.search
 import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.NoAuthException
 import com.duwna.colormi.base.Notify
 import com.duwna.colormi.models.SearchCourseItem
 import com.duwna.colormi.repositories.SearchRepository
@@ -23,8 +24,8 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
             try {
                 val result = repository.loadCourseItems()
                 updateState { it.copy(coursesList = result.first, isLoading = false) }
-                if (result.second) notify(Notify.InternetError())
-            } catch (e: Throwable) {
+                if (result.second) notify(Notify.NoInternetConnection())
+            } catch (t: Throwable) {
                 updateState { it.copy(isLoading = false) }
                 notify(Notify.Error())
             }
@@ -48,11 +49,12 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
                         else "Курс удален из избранного"
                     )
                 )
-
-            } catch (e: Throwable) {
+            } catch (e: NoAuthException) {
                 updateState { it.copy(isLoading = false) }
-                notify(Notify.InternetError())
-                e.printStackTrace()
+                notify(Notify.NoAuthentication())
+            } catch (t: Throwable) {
+                notify(Notify.NoInternetConnection())
+                updateState { it.copy(isLoading = false) }
             }
         }
     }

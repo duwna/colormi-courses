@@ -26,7 +26,7 @@ class EditProfileViewModel : BaseViewModel<EditProfileState>(
             try {
                 val result = repository.getUserInfo()
                 updateState { it.copy(user = result.first, isLoading = false, isSaving = false) }
-                if (result.second) notify(Notify.InternetError())
+                if (result.second) notify(Notify.NoInternetConnection())
             } catch (e: Throwable) {
                 updateState { it.copy(isLoading = false, isSaving = false) }
                 notify(Notify.Error())

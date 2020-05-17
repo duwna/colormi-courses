@@ -61,12 +61,17 @@ sealed class Notify {
 
     data class TextMessage(override val message: String) : Notify()
 
-    data class InternetError(
+    data class NoInternetConnection(
         override val message: String = "Отсутствует подключение к интернету"
     ) : Notify()
 
     data class Error(
         override val message: String = "Возникла ошибка загрузки данных"
+    ) : Notify()
+
+    data class NoAuthentication(
+        override val message: String = "Для продолжения нужно авторизоваться",
+        val actionLabel: String = "Авторизация"
     ) : Notify()
 
     data class ActionMessage(

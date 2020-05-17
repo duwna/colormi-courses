@@ -28,7 +28,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
         btn_sign_out.setOnClickListener {
             viewModel.singOut()
-            findNavController().navigate(R.id.action_profile_to_auth)
         }
 
         swipe_refresh.setOnRefreshListener {
@@ -67,5 +66,10 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
     override fun onStart() {
         super.onStart()
         viewModel.loadUser()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        root.showNavView()
     }
 }

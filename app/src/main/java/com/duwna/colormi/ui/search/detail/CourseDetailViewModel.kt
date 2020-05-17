@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.NoAuthException
 import com.duwna.colormi.base.Notify
 import com.duwna.colormi.models.SearchCourseItem
 import com.duwna.colormi.repositories.SearchRepository
@@ -26,11 +27,10 @@ class CourseDetailViewModel(val idCourse: String) :
             try {
                 val result = repository.loadCourse(idCourse)
                 updateState { it.copy(courseItem = result.first, isLoading = false) }
-                if (result.second) notify(Notify.InternetError())
-            } catch (e: Throwable) {
+                if (result.second) notify(Notify.NoInternetConnection())
+            } catch (t: Throwable) {
                 updateState { it.copy(isLoading = false) }
                 notify(Notify.Error())
-                e.printStackTrace()
             }
         }
     }
@@ -59,10 +59,12 @@ class CourseDetailViewModel(val idCourse: String) :
                     )
                 )
 
-            } catch (e: Throwable) {
+            } catch (e: NoAuthException) {
                 updateState { it.copy(isLoading = false) }
-                notify(Notify.InternetError())
-                e.printStackTrace()
+                notify(Notify.NoAuthentication())
+            } catch (t: Throwable) {
+                notify(Notify.NoInternetConnection())
+                updateState { it.copy(isLoading = false) }
             }
         }
     }
@@ -91,10 +93,12 @@ class CourseDetailViewModel(val idCourse: String) :
                     )
                 )
 
-            } catch (e: Throwable) {
+            } catch (e: NoAuthException) {
                 updateState { it.copy(isLoading = false) }
-                notify(Notify.InternetError())
-                e.printStackTrace()
+                notify(Notify.NoAuthentication())
+            } catch (t: Throwable) {
+                notify(Notify.NoInternetConnection())
+                updateState { it.copy(isLoading = false) }
             }
         }
     }

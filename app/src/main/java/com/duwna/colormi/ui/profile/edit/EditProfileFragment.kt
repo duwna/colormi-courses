@@ -61,10 +61,6 @@ class EditProfileFragment : BaseFragment<EditProfileViewModel>() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        root.showNavView()
-    }
 
     override fun subscribeOnState(state: IViewModelState) {
         state as EditProfileState

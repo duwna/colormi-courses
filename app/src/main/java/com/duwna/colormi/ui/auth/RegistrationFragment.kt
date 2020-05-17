@@ -44,6 +44,7 @@ class RegistrationFragment : BaseFragment<AuthViewModel>() {
         btn_register.isVisible = !state.isLoading
         progress_circular.isVisible = state.isLoading
 
-        if (state.success != null) findNavController().navigate(R.id.navigation_profile)
+        if (state.success != null) findNavController().popBackStack(R.id.navigation_auth, true)
+
     }
 }

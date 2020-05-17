@@ -17,4 +17,10 @@ open class BaseRepository {
             .setPersistenceEnabled(true)
             .build()
     }
+
+    fun checkUser() {
+        if (auth.currentUser == null) throw NoAuthException()
+    }
 }
+
+class NoAuthException : Throwable()

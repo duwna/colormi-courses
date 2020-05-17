@@ -28,10 +28,6 @@ class CourseDetailFragment : BaseFragment<CourseDetailViewModel>() {
         iv_bookmark.setOnClickListener { viewModel.handleBookmark() }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        root.showNavView()
-    }
 
     override fun subscribeOnState(state: IViewModelState) {
         state as CourseDetailState

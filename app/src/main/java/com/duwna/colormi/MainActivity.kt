@@ -45,14 +45,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun renderNotification(notify: Notify) {
-        val snackbar = Snackbar.make(container, notify.message, Snackbar.LENGTH_LONG)
-        snackbar.anchorView = nav_view
-        when (notify) {
-            is Notify.InternetError -> snackbar.duration = Snackbar.LENGTH_SHORT
-            is Notify.ActionMessage ->
-                snackbar.setAction(notify.actionLabel) { notify.actionHandler.invoke() }
+        val snackBar = Snackbar.make(container, notify.message, Snackbar.LENGTH_LONG).apply {
+            anchorView = nav_view
         }
-        snackbar.show()
+        when (notify) {
+            is Notify.NoAuthentication ->  {
+                snackBar.setAction(notify.actionLabel) {
+                    navController.navigate(R.id.navigation_auth)
+                }.duration = Snackbar.LENGTH_LONG
+            }
+            is Notify.ActionMessage ->
+                snackBar.setAction(notify.actionLabel) { notify.actionHandler.invoke() }
+        }
+        snackBar.show()
     }
 
     fun showNavView() {

@@ -25,6 +25,7 @@ class EnterFragment : BaseFragment<AuthViewModel>() {
         btn_enter.isVisible = !state.isLoading
         progress_circular.isVisible = state.isLoading
 
-        if (state.success != null) findNavController().navigate(R.id.navigation_profile)
+        if (state.success != null) findNavController().popBackStack(R.id.navigation_auth, true)
+
     }
 }

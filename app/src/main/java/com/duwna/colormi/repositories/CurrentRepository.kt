@@ -12,6 +12,7 @@ import java.util.*
 class CurrentRepository : BaseRepository() {
 
     suspend fun loadCourses(): List<CurrentCourseItem> {
+        checkUser()
         val boughtCourses = database.collection("users")
             .document(firebaseUserId)
             .collection("purchases")

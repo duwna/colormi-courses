@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.animation.AnimationUtils
 import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -76,6 +77,11 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
         } else {
             menuItem.setIcon(R.drawable.ic_bookmark_unchecked_menu)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        root.showNavView()
     }
 
 }

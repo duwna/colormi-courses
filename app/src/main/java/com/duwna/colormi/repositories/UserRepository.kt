@@ -15,6 +15,7 @@ class UserRepository : BaseRepository() {
     private val storage = Firebase.storage.reference
 
     suspend fun uploadImage(uri: Uri) {
+        checkUser()
         storage.child("avatars/$firebaseUserId")
             .putFile(uri)
             .await()
@@ -30,6 +31,7 @@ class UserRepository : BaseRepository() {
     }
 
     suspend fun updateUser(user: User) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .update(
@@ -43,6 +45,7 @@ class UserRepository : BaseRepository() {
     }
 
     suspend fun getUserInfo(): Pair<User, Boolean> {
+        checkUser()
         val result = database.collection("users")
             .document(firebaseUserId)
             .get()
@@ -57,13 +60,15 @@ class UserRepository : BaseRepository() {
     fun signOut() = auth.signOut()
 
     private suspend fun getImageUrl(): String? = tryOrNull {
+        checkUser()
         storage.child("avatars/$firebaseUserId")
             .downloadUrl
             .await()
-            .toString().also { Log.e("!!!!!!!!", it) }
+            .toString()
     }
 
     private suspend fun insertUser(user: User) {
+        checkUser()
         database.collection("users")
             .document(firebaseUserId)
             .set(user)

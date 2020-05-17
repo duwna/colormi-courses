@@ -17,11 +17,11 @@ class AuthFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as? MainActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return inflater.inflate(R.layout.fragment_authentication, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         btn_enter.setOnClickListener {
             findNavController().navigate(R.id.action_auth_to_enter)
         }

@@ -47,4 +47,9 @@ class CurrentFragment : BaseFragment<CurrentViewModel>() {
         startActivity(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        root.showNavView()
+    }
+
 }

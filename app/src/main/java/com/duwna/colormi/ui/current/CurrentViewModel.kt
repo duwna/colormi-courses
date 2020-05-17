@@ -3,6 +3,7 @@ package com.duwna.colormi.ui.current
 import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.NoAuthException
 import com.duwna.colormi.base.Notify
 import com.duwna.colormi.models.CurrentCourseItem
 import com.duwna.colormi.repositories.CurrentRepository
@@ -23,10 +24,12 @@ class CurrentViewModel : BaseViewModel<CurrentCoursesState>(CurrentCoursesState(
             try {
                 val courses = repository.loadCourses()
                 updateState { it.copy(coursesList = courses, isLoading = false) }
-            } catch (e: Throwable) {
+            } catch (e: NoAuthException) {
                 updateState { it.copy(isLoading = false) }
-                notify(Notify.Error())
-                e.printStackTrace()
+                notify(Notify.NoAuthentication())
+            } catch (t: Throwable) {
+                notify(Notify.TextMessage("Нет купленных курсов"))
+                updateState { it.copy(isLoading = false) }
             }
         }
     }

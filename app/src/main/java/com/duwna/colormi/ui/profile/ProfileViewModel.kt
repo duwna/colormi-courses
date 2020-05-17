@@ -3,6 +3,7 @@ package com.duwna.colormi.ui.profile
 import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.NoAuthException
 import com.duwna.colormi.base.Notify
 import com.duwna.colormi.models.database.User
 import com.duwna.colormi.repositories.UserRepository
@@ -19,17 +20,20 @@ class ProfileViewModel : BaseViewModel<ProfileState>(ProfileState()) {
             try {
                 val result = repository.getUserInfo()
                 updateState { it.copy(user = result.first, isLoading = false) }
-                if (result.second) notify(Notify.InternetError())
-            } catch (e: Throwable) {
+                if (result.second) notify(Notify.NoInternetConnection())
+            } catch (e: NoAuthException) {
                 updateState { it.copy(isLoading = false) }
-                notify(Notify.Error())
-                e.printStackTrace()
+                notify(Notify.NoAuthentication())
+            } catch (t: Throwable) {
+                notify(Notify.NoInternetConnection())
+                updateState { it.copy(isLoading = false) }
             }
         }
     }
 
     fun singOut() {
         repository.signOut()
+        notify(Notify.TextMessage("Вы вышли из аккаунта"))
     }
 
 }
