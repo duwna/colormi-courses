@@ -42,4 +42,6 @@ abstract class BaseFragment<T : BaseViewModel<out IViewModelState>> : Fragment()
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
 }

@@ -1,8 +1,8 @@
 package com.duwna.colormi
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -55,4 +55,15 @@ class MainActivity : AppCompatActivity() {
         snackbar.show()
     }
 
+    fun showNavView() {
+        nav_view.animate().translationY(0f).withStartAction {
+            nav_view.isVisible = true
+        }.duration = 300
+    }
+
+    fun hideNavView() {
+        nav_view.animate().translationY(nav_view.height.toFloat()).withEndAction {
+            nav_view.isVisible = false
+        }.duration = 300
+    }
 }

@@ -4,7 +4,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
@@ -18,8 +20,10 @@ class SearchFragment : BaseFragment<SearchViewModel>() {
     override val viewModel: SearchViewModel by viewModels()
 
     private val searchAdapter = SearchAdapter(
-        onBuyClicked = {
-
+        onItemClicked = { courseItem ->
+            findNavController().navigate(
+                R.id.action_search_to_detail, bundleOf("idCourse" to courseItem.idCourse)
+            )
         },
         onBookmarkClicked = { courseItem, index ->
             viewModel.handleBookmark(courseItem, index)

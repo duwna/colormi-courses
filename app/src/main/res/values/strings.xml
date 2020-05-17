@@ -3,5 +3,5 @@
     <string name="title_news">Новости</string>
     <string name="title_search">Все курсы</string>
     <string name="title_profile">Профиль</string>
-    <string name="title_current">title_current</string>
+    <string name="title_current">Текущие курсы</string>
 </resources>

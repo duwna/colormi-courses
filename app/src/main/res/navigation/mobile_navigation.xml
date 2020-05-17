@@ -9,7 +9,15 @@
         android:id="@+id/navigation_search"
         android:name="com.duwna.colormi.ui.search.SearchFragment"
         android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_search_to_detail"
+            app:destination="@id/navigation_course_detail"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_current"
@@ -21,7 +29,7 @@
         android:id="@+id/navigation_profile"
         android:name="com.duwna.colormi.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_auth"
             app:destination="@id/navigation_auth"
@@ -39,10 +47,10 @@
     </fragment>
 
     <fragment
-        android:label="Авторизация"
         android:id="@+id/navigation_auth"
         android:name="com.duwna.colormi.ui.auth.AuthFragment"
-        tools:layout="@layout/fragment_authentication" >
+        android:label="Авторизация"
+        tools:layout="@layout/fragment_authentication">
 
         <action
             android:id="@+id/action_auth_to_registration"
@@ -50,7 +58,7 @@
             app:enterAnim="@anim/slide_from_right_to_center"
             app:exitAnim="@anim/slide_from_center_to_left"
             app:popEnterAnim="@anim/slide_from_left_to_center"
-            app:popExitAnim="@anim/slide_from_center_to_right"  />
+            app:popExitAnim="@anim/slide_from_center_to_right" />
         <action
             android:id="@+id/action_auth_to_enter"
             app:destination="@id/navigation_enter"
@@ -61,26 +69,35 @@
     </fragment>
 
     <fragment
-        android:label="Регистрация"
         android:id="@+id/navigation_registration"
         android:name="com.duwna.colormi.ui.auth.RegistrationFragment"
+        android:label="Регистрация"
         tools:layout="@layout/fragment_registration" />
 
     <fragment
-        android:label="Вход"
         android:id="@+id/navigation_enter"
         android:name="com.duwna.colormi.ui.auth.EnterFragment"
+        android:label="Вход"
         tools:layout="@layout/fragment_enter" />
 
     <fragment
-        android:label="Редактирование профиля"
         android:id="@+id/editProfileFragment"
         android:name="com.duwna.colormi.ui.profile.edit.EditProfileFragment"
+        android:label="Редактирование профиля"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
-        android:label="@string/title_news"
         android:id="@+id/navigation_news"
         android:name="com.duwna.colormi.ui.news.NewsFragment"
+        android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/navigation_course_detail"
+        android:name="com.duwna.colormi.ui.search.detail.CourseDetailFragment"
+        android:label="Курс"
+        tools:layout="@layout/fragment_course_detail" >
+        <argument
+            android:name="idCourse"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

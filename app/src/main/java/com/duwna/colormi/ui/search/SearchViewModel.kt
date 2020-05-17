@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.duwna.colormi.base.BaseViewModel
 import com.duwna.colormi.base.IViewModelState
 import com.duwna.colormi.base.Notify
-import com.duwna.colormi.models.CourseItem
+import com.duwna.colormi.models.SearchCourseItem
 import com.duwna.colormi.repositories.SearchRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -31,7 +31,7 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
         }
     }
 
-    fun handleBookmark(courseItem: CourseItem, index: Int) {
+    fun handleBookmark(courseItem: SearchCourseItem, index: Int) {
         updateState { it.copy(isLoading = true) }
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -63,15 +63,15 @@ class SearchViewModel : BaseViewModel<SearchState>(SearchState()) {
 }
 
 data class SearchState(
-    val coursesList: List<CourseItem> = emptyList(),
+    val coursesList: List<SearchCourseItem> = emptyList(),
     val isLoading: Boolean = false,
     val isOnlyBookmarked: Boolean = false,
     val searchQuery: String = ""
 ) : IViewModelState {
 
-    fun showCurses(): List<CourseItem> = coursesList.filter { needToShow(it) }
+    fun showCurses(): List<SearchCourseItem> = coursesList.filter { needToShow(it) }
 
-    private fun needToShow(courseItem: CourseItem): Boolean {
+    private fun needToShow(courseItem: SearchCourseItem): Boolean {
         if (isOnlyBookmarked && !courseItem.isBookmarked) return false
         if (searchQuery.isNotBlank() && !courseItem.title.contains(searchQuery)) return false
         return true

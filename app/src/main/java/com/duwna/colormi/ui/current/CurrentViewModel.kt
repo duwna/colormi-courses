@@ -1,13 +1,38 @@
 package com.duwna.colormi.ui.current
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.duwna.colormi.base.BaseViewModel
+import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.base.Notify
+import com.duwna.colormi.models.CurrentCourseItem
+import com.duwna.colormi.repositories.CurrentRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class CurrentViewModel : ViewModel() {
+class CurrentViewModel : BaseViewModel<CurrentCoursesState>(CurrentCoursesState()) {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is current curses Fragment"
+    private val repository = CurrentRepository()
+
+    init {
+        loadCourses()
     }
-    val text: LiveData<String> = _text
+
+    fun loadCourses() {
+        updateState { it.copy(isLoading = true) }
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val courses = repository.loadCourses()
+                updateState { it.copy(coursesList = courses, isLoading = false) }
+            } catch (e: Throwable) {
+                updateState { it.copy(isLoading = false) }
+                notify(Notify.Error())
+                e.printStackTrace()
+            }
+        }
+    }
 }
+
+data class CurrentCoursesState(
+    val coursesList: List<CurrentCourseItem> = emptyList(),
+    val isLoading: Boolean = false
+) : IViewModelState

@@ -1,14 +1,18 @@
 package com.duwna.colormi.ui.profile
 
 import android.util.Log
+import android.view.View
+import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.duwna.colormi.R
 import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
+import com.duwna.colormi.extensions.circularShow
 import com.duwna.colormi.models.database.fullName
 import com.duwna.colormi.models.database.initials
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : BaseFragment<ProfileViewModel>() {
@@ -37,7 +41,15 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
 
         swipe_refresh.isRefreshing = state.isLoading
 
+        when {
+            state.user == null -> card_profile_data.visibility = View.INVISIBLE
+            !card_profile_data.isVisible && ViewCompat.isAttachedToWindow(card_profile_data) ->
+                card_profile_data.circularShow()
+            else -> card_profile_data.isVisible = true
+        }
+
         state.user?.let { user ->
+
             tv_fullName.text = user.fullName
             tv_email.text = user.email
             iv_avatar.setInitials(user.initials ?: "")
@@ -45,7 +57,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             Log.e("TAG", user.toString())
             user.avatarUrl?.let {
                 iv_avatar.isAvatarMode = true
-                Glide.with(root)
+                Picasso.get()
                     .load(it)
                     .into(iv_avatar)
             } ?: run { iv_avatar.isAvatarMode = false }
