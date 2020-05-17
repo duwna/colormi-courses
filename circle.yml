@@ -21,8 +21,8 @@ jobs:
           name: Build APK
           command: ./gradlew assembleDebug
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
-          path: ~/code/
-          destination: apks/
+          path: ~/code
+          destination: app/build/outputs/apk/debug/apks/
           
 #      - run: 
 #             name: send email with apk
