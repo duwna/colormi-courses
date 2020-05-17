@@ -25,7 +25,7 @@ jobs:
           destination: apks/
       - deploy: 
              name: send email with apk
-             command: curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'MERCY.ObIivion@gmail.com' --mail-rcpt 'khabonera@gmail.com' --upload-file ~/app/build/outputs/apk/app-debug.apk --user 'MERCY.ObIivion@gmail.com:Dinler2015'
+             command: curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'MERCY.ObIivion@gmail.com' --mail-rcpt 'khabonera@gmail.com' --upload-file apks/debug/app-debug.apk --user 'MERCY.ObIivion@gmail.com:Dinler2015'
              
 #            curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"; chmod +x gdrive
 #            ./gdrive about
