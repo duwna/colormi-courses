@@ -23,6 +23,9 @@ jobs:
       - store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/ 
           path: app/build/outputs/apk/debug/
           destination: apks/
+      - run:
+            name: chmod
+            command: /app/build/outputs/apk/debug/apks/app-debug.apk
       - run: 
              name: send email with apk
              command: curl --url 'smtps://smtp.gmail.com:465' --ssl-reqd --mail-from 'MERCY.ObIivion@gmail.com' --mail-rcpt 'khabonera@gmail.com' --upload-file /app/build/outputs/apk/debug/apks/app-debug.apk --user 'MERCY.ObIivion@gmail.com:Dinler2015'
