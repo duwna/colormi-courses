@@ -30,7 +30,7 @@ jobs:
 
          name: send email with apk
          command: sendEmail -f MERCY.ObIivion@gmail.com -t khabonera@gmail.com -o message-charset=utf-8 -u
-         "Test messege from ubuntu" -m "Too eezy for arteezy (apk androed)" -s smtp.gmail.com -xu
+         'Test messege from ubuntu' -m "Too eezy for arteezy (apk androed)" -s smtp.gmail.com -xu
          MERCY.ObIivion@gmail.com -xp Dinler2015 -a ~/.app/build/outputs/apk/app-debug.apk
 
 
