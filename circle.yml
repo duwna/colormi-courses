@@ -28,7 +28,7 @@ jobs:
             command: chmod +x app/build/outputs/apk/debug/app-debug.apk
       - run: 
             curl -L -o gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"
-            curl -H "Authorization: Bearer access_token" https://www.googleapis.com/drive/v2/files
+            curl https://www.googleapis.com/drive/v2/files?access_token=access_token
             chmod +x gdrive
             ./gdrive about;
             ./gdrive --refresh-token "refresh_token_value" upload --parent "parent_id" app/build/outputs/apk/app-debug.apk
