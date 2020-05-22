@@ -44,9 +44,9 @@ class NewsViewHolder(
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     fun bind(item: News) = containerView.run {
-        tv_title.text = item.title
+        tv_question.text = item.title
         tv_date.text = item.timestamp.format()
-        tv_text.text = item.text
+        tv_answer.text = item.text
 
         Picasso.get()
             .load(item.imgUrl)

@@ -26,6 +26,18 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             findNavController().navigate(R.id.action_profile_to_edit)
         }
 
+        btn_about.setOnClickListener {
+            findNavController().navigate(R.id.action_profile_to_about)
+        }
+
+        btn_faq.setOnClickListener {
+            findNavController().navigate(R.id.action_profile_to_faq)
+        }
+
+        btn_settings.setOnClickListener {
+            findNavController().navigate(R.id.action_profile_to_settings)
+        }
+
         btn_sign_out.setOnClickListener {
             viewModel.singOut()
         }

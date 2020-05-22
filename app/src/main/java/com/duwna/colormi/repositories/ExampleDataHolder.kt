@@ -2,6 +2,7 @@ package com.duwna.colormi.repositories
 
 import com.duwna.colormi.models.SearchCourseItem
 import com.duwna.colormi.models.database.Course
+import com.duwna.colormi.models.database.Faq
 import com.duwna.colormi.models.database.News
 import java.util.*
 import kotlin.random.Random
@@ -60,7 +61,7 @@ fun generateCourse(): Course {
     )
 }
 
-fun generateNews() : News {
+fun generateNews(): News {
     val descriptionSize = (100..lorem.length / 4).random()
     val start = (0..lorem.length / 4).random()
     return News(
@@ -68,6 +69,15 @@ fun generateNews() : News {
         text = lorem.subSequence(start, start.plus(descriptionSize)).toString(),
         timestamp = Date(),
         imgUrl = imgUrls[imgUrls.indices.random()]
+    )
+}
+
+fun generateFaq(): Faq {
+    val descriptionSize = (100..lorem.length / 4).random()
+    val start = (0..lorem.length / 4).random()
+    return Faq(
+        question = lorem.subSequence(start, start.plus(descriptionSize / 3)).toString(),
+        answer = lorem.subSequence(start, start.plus(descriptionSize)).toString()
     )
 }
 

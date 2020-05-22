@@ -50,8 +50,8 @@ class CurrentViewHolder(
         onDownloadClicked: (item: CurrentCourseItem) -> Unit
     ) = containerView.run {
 
-        tv_title.text = item.title
-        tv_text.text = item.description
+        tv_question.text = item.title
+        tv_answer.text = item.description
         tv_type.text = item.type
         tv_date.text = daysLeftToString(item.daysLeft)
 

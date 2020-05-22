@@ -42,8 +42,8 @@ class CourseDetailFragment : BaseFragment<CourseDetailViewModel>() {
 
         state.courseItem?.run {
 
-            tv_text.text = description
-            tv_title.text = title
+            tv_answer.text = description
+            tv_question.text = title
             tv_type.text = type
             tv_rating.text = rating
 

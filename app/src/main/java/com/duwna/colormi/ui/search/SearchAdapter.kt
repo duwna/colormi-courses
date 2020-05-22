@@ -55,8 +55,8 @@ class SearchViewHolder(
         onBookmarkClicked: (item: SearchCourseItem, index: Int) -> Unit
     ) = containerView.run {
 
-        tv_title.text = item.title
-        tv_text.text = item.description
+        tv_question.text = item.title
+        tv_answer.text = item.description
         tv_type.text = item.type
 
         tv_buy.run {

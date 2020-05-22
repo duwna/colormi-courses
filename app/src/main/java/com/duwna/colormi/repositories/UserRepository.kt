@@ -16,9 +16,6 @@ class UserRepository : BaseRepository() {
 
     suspend fun uploadImage(uri: Uri) {
         checkUser()
-        storage.child("avatars/$firebaseUserId")
-            .putFile(uri)
-            .await()
     }
 
     suspend fun authUser(email: String, password: String) {
@@ -52,7 +49,9 @@ class UserRepository : BaseRepository() {
             .await()
 
         var user = result.toObject<User>()!!
-        if (!result.metadata.isFromCache) user = user.copy(avatarUrl = getImageUrl())
+        if (!result.metadata.isFromCache) user = user.copy(avatarUrl = getImageUrl().also {
+            Log.e(this::class.java.simpleName, it)
+        })
 
         return user to result.metadata.isFromCache
     }

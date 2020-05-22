@@ -32,11 +32,32 @@
         tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_edit"
-            app:destination="@id/editProfileFragment"
+            app:destination="@id/navigation_edit_profile"
             app:enterAnim="@anim/slide_from_right_to_center"
             app:exitAnim="@anim/slide_from_center_to_left"
             app:popEnterAnim="@anim/slide_from_left_to_center"
             app:popExitAnim="@anim/slide_from_center_to_right" />
+        <action
+            android:id="@+id/action_profile_to_about"
+            app:destination="@id/navigation_about"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right"/>
+        <action
+            android:id="@+id/action_profile_to_faq"
+            app:destination="@id/navigation_faq"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right"/>
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/navigation_settings"
+            app:enterAnim="@anim/slide_from_right_to_center"
+            app:exitAnim="@anim/slide_from_center_to_left"
+            app:popEnterAnim="@anim/slide_from_left_to_center"
+            app:popExitAnim="@anim/slide_from_center_to_right"/>
     </fragment>
 
     <fragment
@@ -74,7 +95,7 @@
         tools:layout="@layout/fragment_enter" />
 
     <fragment
-        android:id="@+id/editProfileFragment"
+        android:id="@+id/navigation_edit_profile"
         android:name="com.duwna.colormi.ui.profile.edit.EditProfileFragment"
         android:label="Редактирование профиля"
         tools:layout="@layout/fragment_edit_profile" />
@@ -92,5 +113,22 @@
             android:name="idCourse"
             app:argType="string" />
     </fragment>
+
+    <fragment
+        tools:layout="@layout/fragment_about"
+        android:id="@+id/navigation_about"
+        android:name="com.duwna.colormi.ui.profile.about.AboutFragment"
+        android:label="О нас" />
+    <fragment
+        tools:layout="@layout/fragment_faq"
+        android:id="@+id/navigation_faq"
+        android:name="com.duwna.colormi.ui.profile.faq.FaqFragment"
+        android:label="Вопросы и ответы" />
+
+    <fragment
+        tools:layout="@layout/fragment_settings"
+        android:id="@+id/navigation_settings"
+        android:name="com.duwna.colormi.ui.profile.SettingsFragment"
+        android:label="Настройки" />
 
 </navigation>
