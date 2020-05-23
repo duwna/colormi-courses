@@ -19,26 +19,28 @@ class ProfileViewModel : BaseViewModel<ProfileState>(ProfileState()) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.getUserInfo()
-                updateState { it.copy(user = result.first, isLoading = false) }
+                updateState { it.copy(user = result.first, isLoading = false, isAuth = true) }
                 if (result.second) notify(Notify.NoInternetConnection())
             } catch (e: NoAuthException) {
-                updateState { it.copy(isLoading = false) }
+                updateState { it.copy(isLoading = false, isAuth = false, user = null) }
                 notify(Notify.NoAuthentication())
             } catch (t: Throwable) {
+                t.printStackTrace()
                 notify(Notify.NoInternetConnection())
-                updateState { it.copy(isLoading = false) }
+                updateState { it.copy(isLoading = false, isAuth = false, user = null) }
             }
         }
     }
 
     fun singOut() {
         repository.signOut()
-        notify(Notify.TextMessage("Вы вышли из аккаунта"))
+        loadUser()
     }
 
 }
 
 data class ProfileState(
     val user: User? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isAuth: Boolean = true
 ) : IViewModelState

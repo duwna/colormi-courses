@@ -49,10 +49,7 @@ class UserRepository : BaseRepository() {
             .await()
 
         var user = result.toObject<User>()!!
-        if (!result.metadata.isFromCache) user = user.copy(avatarUrl = getImageUrl().also {
-            Log.e(this::class.java.simpleName, it)
-        })
-
+        if (!result.metadata.isFromCache) user = user.copy(avatarUrl = getImageUrl())
         return user to result.metadata.isFromCache
     }
 

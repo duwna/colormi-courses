@@ -7,9 +7,9 @@ import com.duwna.colormi.base.BaseFragment
 import com.duwna.colormi.base.IViewModelState
 import kotlinx.android.synthetic.main.fragment_faq.*
 
-class FaqFragment : BaseFragment<NewsViewModel>() {
+class FaqFragment : BaseFragment<FaqViewModel>() {
 
-    override val viewModel: NewsViewModel by viewModels()
+    override val viewModel: FaqViewModel by viewModels()
     override val layout: Int = R.layout.fragment_faq
 
     private val faqAdapter = FaqAdapter()
@@ -26,7 +26,7 @@ class FaqFragment : BaseFragment<NewsViewModel>() {
     }
 
     override fun subscribeOnState(state: IViewModelState) {
-        state as NewsState
+        state as FaqState
         swipe_refresh.isRefreshing = state.isLoading
         faqAdapter.submitList(state.faqList)
     }

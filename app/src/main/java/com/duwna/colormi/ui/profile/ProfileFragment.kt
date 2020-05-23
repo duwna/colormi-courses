@@ -59,6 +59,8 @@ class ProfileFragment : BaseFragment<ProfileViewModel>() {
             else -> card_profile_data.isVisible = true
         }
 
+         btn_sign_out.isVisible = state.isAuth
+
         state.user?.let { user ->
 
             tv_fullName.text = user.fullName

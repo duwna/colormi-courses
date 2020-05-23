@@ -9,7 +9,7 @@ import com.duwna.colormi.repositories.InfoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NewsViewModel : BaseViewModel<NewsState>(NewsState()) {
+class FaqViewModel : BaseViewModel<FaqState>(FaqState()) {
 
     private val repository = InfoRepository()
 
@@ -32,7 +32,7 @@ class NewsViewModel : BaseViewModel<NewsState>(NewsState()) {
 
 }
 
-data class NewsState(
+data class FaqState(
     val faqList: List<Faq> = emptyList(),
     val isLoading: Boolean = false
 ) : IViewModelState
