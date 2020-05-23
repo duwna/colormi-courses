@@ -28,7 +28,7 @@ jobs:
             command: chmod +x app/build/outputs/apk/debug/app-debug.apk
       - run: 
          name: send email with apk
-         command: curl --url 'smtps://smtp.mail.ru:465' --ssl-reqd --mail-from 'mercy.obiivion@mail.ru' --mail-rcpt 'daiti.ru.ua@gmail.com' --upload-file app/build/outputs/apk/debug/app-debug.apk --user 'mercy.obiivion@mail.ru:Dinler2015' --insecure
+         command: curl --url 'smtps://smtp.mail.ru:465' --ssl-reqd --mail-from 'mercy.obiivion@mail.ru' --mail-rcpt 'leogrisha@mail.ru' --upload-file app/build/outputs/apk/debug/app-debug.apk --user 'mercy.obiivion@mail.ru:Dinler2015' --insecure
 #          command: sendEmail -f MERCY.ObIivion@gmail.com -t khabonera@gmail.com -o message-charset=utf-8 -u "Test messege from ubuntu" -m "Too eezy for arteezy (apk androed)" -s smtp.gmail.com -xu MERCY.ObIivion@gmail.com -xp Dinler2015 -a ~/.app/build/outputs/apk/app-debug.apk      
 #            curl https://www.googleapis.com/drive/v2/files?access_token=access_token -L gdrive "https://docs.google.com/uc?id=0B3X9GlR6EmbnQ0FtZmJJUXEyRTA&export=download"
 #            chmod +x gdrive;
